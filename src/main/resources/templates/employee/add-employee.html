@@ -96,6 +96,7 @@
         <label for="nbrCnaps">CNAPS Number:</label>
         <input type="text" id="nbrCnaps" th:field="*{nbrCnaps}" required>
         <br/>
+        <p th:if="${cnapsError}" class="cinError" th:text="${cnapsError}"></p>
 
         <button type="submit">Add</button>
       <button type="button" onclick="prevPage()">Previous</button>
