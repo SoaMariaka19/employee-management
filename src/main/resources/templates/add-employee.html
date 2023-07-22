@@ -3,33 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <title>Add Employee</title>
-  <link rel="stylesheet" th:href="@{/style.css}" >
-
+    <link rel="stylesheet" th:href="@{/style.css}" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 </head>
 <body>
 <h1>Add Employee</h1>
-<form th:object="${employee}" th:action="@{/employees/add}" method="post" enctype="multipart/form-data">
-  <label for="firstName">First Name:</label>
-  <input type="text" id="firstName" th:field="*{firstName}" required/>
-  <br/>
+  <div class="form-page" style="display: block;">
+    <form th:object="${employee}" th:action="@{/employees/add}" method="post" enctype="multipart/form-data">
 
-  <label for="lastName">Last Name:</label>
-  <input type="text" id="lastName" th:field="*{lastName}" required/>
-  <br/>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" th:field="*{firstName}" required/>
+        <br/>
 
-  <label for="dateOfBirth">Date of Birth:</label>
-  <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" required pattern="yyyy-MM-dd"/>
-  <br/>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" th:field="*{lastName}" required/>
+        <br/>
 
-  <label for="registrationNbr">Registration Number:</label>
-  <input type="text" id="registrationNbr" th:field="*{registrationNbr}" required>
-  <br/>
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" required pattern="yyyy-MM-dd"/>
+        <br/>
 
-  <label for="image">Identity Photo:</label>
-  <input type="file" id="image" name="photo" th:field="*{image}">
-  <br/>
+        <label for="sex">Sex:</label>
+        <select id="sex" th:field="*{sex}" required>
+          <option value="H">Male</option>
+          <option value="F">Female</option>
+        </select>
+        <br/>
 
-  <button type="submit">Add</button>
-</form>
+        <label for="registrationNbr">Registration Number:</label>
+        <input type="text" id="registrationNbr" th:field="*{registrationNbr}" required>
+        <br/>
+
+          <p th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></p>
+
+        <label for="phoneNbr">Phone Number:</label>
+        <input type="text" id="phoneNbr" th:field="*{phoneNbr}" required>
+        <br/>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" th:field="*{address}" required>
+        <br/>
+
+        <label for="image">Identity Photo:</label>
+        <input type="file" id="image" name="photo" th:field="*{image}">
+        <br/>
+
+        <label for="beggingDate">Hiring Date:</label>
+          <input type="date" id="beggingDate" th:field="*{beggingDate}" required pattern="yyyy-MM-dd"/>
+        <br/>
+
+      <button type="button" onclick="nextPage()">Next</button>
+    </form>
+  </div>
+
+  <div class="form-page" style="display: none;">
+    <form th:object="${employee}" th:action="@{/employees/add}" method="post" enctype="multipart/form-data">
+
+        <label for="outDate">Departure Date:</label>
+        <input type="date" id="outDate" th:field="*{outDate}" pattern="yyyy-MM-dd"/>
+        <br/>
+
+        <label for="emailPerso">Personal Email:</label>
+        <input type="email" id="emailPerso" th:field="*{emailPerso}" required>
+        <br/>
+
+        <label for="emailPro">Professional Email:</label>
+        <input type="email" id="emailPro" th:field="*{emailPro}" required>
+        <br/>
+
+        <label for="nbrChildren">Number of Children:</label>
+        <input type="number" id="nbrChildren" th:field="*{nbrChildren}" required>
+        <br/>
+
+        <label for="cateSocioPro">Socio-Professional Category:</label>
+        <select id="cateSocioPro" th:field="*{cateSocioPro}" required>
+          <!-- Add options based on your available SocioPro categories -->
+        </select>
+        <br/>
+
+        <label for="cin">National Card:</label>
+        <input type="text" id="cin" th:field="*{cin}" required>
+        <br/>
+
+        <label for="postsList">Posts:</label>
+        <select id="postsList" th:field="*{postsList}" required multiple>
+          <!-- Add options based on your available posts -->
+        </select>
+        <br/>
+
+        <label for="nbrCnaps">CNAPS Number:</label>
+        <input type="text" id="nbrCnaps" th:field="*{nbrCnaps}" required>
+        <br/>
+
+        <button type="submit">Add</button>
+      <button type="button" onclick="prevPage()">Previous</button>
+    </form>
+  </div>
+
 </body>
+<script>
+  function showPage(pageNumber) {
+    const pages = document.querySelectorAll('.form-page');
+    for (let i = 0; i < pages.length; i++) {
+      pages[i].style.display = i === pageNumber ? 'block' : 'none';
+    }
+  }
+
+  function nextPage() {
+    showPage(1);
+  }
+
+  function prevPage() {
+    showPage(0);
+  }
+</script>
 </html>

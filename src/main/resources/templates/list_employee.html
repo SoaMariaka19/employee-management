@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Employee List</title>
     <link rel="stylesheet" th:href="@{/style.css}" >
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 </head>
 <body>
 <h1>Employee List</h1>
@@ -25,7 +27,7 @@
         <td th:text="${employee.dateOfBirth}"></td>
         <td th:text="${employee.registrationNbr}" ></td>
         <td>
-            <a th:href="@{'/employees/' + ${employee.id}}">More...</a>
+            <a th:href="@{'/employees/' + ${employee.id}}">Infos</a>
         </td>
     </tr>
 </table>
