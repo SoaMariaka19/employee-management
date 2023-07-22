@@ -1,6 +1,6 @@
 package com.prog4.controller.mapper;
 
-import com.prog4.model.*;
+import com.prog4.entity.*;
 import com.prog4.service.CnapsService;
 import com.prog4.service.NationalCardService;
 import com.prog4.service.PostsService;

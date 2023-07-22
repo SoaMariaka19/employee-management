@@ -1,6 +1,6 @@
 package com.prog4.repository;
 
-import com.prog4.model.NationalCard;
+import com.prog4.entity.NationalCard;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,7 @@
 package com.prog4.service;
 
-import com.prog4.model.Employee;
+import com.prog4.entity.Employee;
 import com.prog4.repository.EmployeeRepository;
-import com.prog4.service.validator.AlphanumericValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

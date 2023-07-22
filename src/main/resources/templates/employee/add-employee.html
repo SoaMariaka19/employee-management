@@ -79,6 +79,11 @@
 
         <label for="cateSocioPro">Socio-Professional Category:</label>
         <select id="cateSocioPro" th:field="*{cateSocioPro}" required>
+            <option th:each="socio : ${socioPro}" th:value="${socio.categories}"
+                    th:text="${socio.categories}"
+            >
+
+            </option>
         </select>
         <br/>
 

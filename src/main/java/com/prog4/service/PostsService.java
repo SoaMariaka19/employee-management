@@ -1,6 +1,6 @@
 package com.prog4.service;
 
-import com.prog4.model.Post;
+import com.prog4.entity.Post;
 import com.prog4.repository.PostsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

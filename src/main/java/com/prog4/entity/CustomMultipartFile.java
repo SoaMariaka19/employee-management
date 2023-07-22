@@ -1,4 +1,4 @@
-package com.prog4.model;
+package com.prog4.entity;
 
 import org.springframework.web.multipart.MultipartFile;
 

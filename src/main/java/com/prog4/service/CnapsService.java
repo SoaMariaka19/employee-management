@@ -1,6 +1,6 @@
 package com.prog4.service;
 
-import com.prog4.model.Cnaps;
+import com.prog4.entity.Cnaps;
 import com.prog4.repository.CnapsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

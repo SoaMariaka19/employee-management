@@ -1,6 +1,6 @@
 package com.prog4.controller;
 
-import com.prog4.model.SocioPro;
+import com.prog4.entity.SocioPro;
 import com.prog4.service.SocioProService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

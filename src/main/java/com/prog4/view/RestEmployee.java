@@ -1,6 +1,6 @@
 package com.prog4.view;
 
-import com.prog4.model.*;
+import com.prog4.entity.*;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 

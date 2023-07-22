@@ -1,4 +1,4 @@
-package com.prog4.model;
+package com.prog4.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,14 +9,22 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Fiscal {
+public class Business {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
-    private String NIF;
+    private String name;
     @Column(unique = true)
-    private String STAT;
+    private String slogan;
     @Column(unique = true)
-    private String RCS;
+    private String address;
+    @Column(unique = true)
+    private String email;
+    @Column(unique = true)
+    private String phone;
+    private String logo;
+
+    @OneToOne
+    private Fiscal idFiscal;
 }

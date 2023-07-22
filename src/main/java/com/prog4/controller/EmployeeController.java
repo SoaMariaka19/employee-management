@@ -1,11 +1,13 @@
 package com.prog4.controller;
 
 import com.prog4.controller.mapper.EmployeeMapper;
-import com.prog4.model.Post;
+import com.prog4.entity.Post;
+import com.prog4.entity.SocioPro;
 import com.prog4.service.PostsService;
+import com.prog4.service.SocioProService;
 import com.prog4.service.validator.AlphanumericValidator;
 import com.prog4.view.RestEmployee;
-import com.prog4.model.Employee;
+import com.prog4.entity.Employee;
 import com.prog4.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -23,8 +25,9 @@ import java.util.List;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
-    private EmployeeMapper mapper;
     private final PostsService postsService;
+    private final SocioProService socioProService;
+    private EmployeeMapper mapper;
     private final AlphanumericValidator validator;
     @GetMapping
     public String getAllEmployees(Model model){
@@ -37,8 +40,10 @@ public class EmployeeController {
     @GetMapping("/add")
     public String showAddEmployeeForm(Model model){
         List<Post> postsLists = postsService.findAll();
+        List<SocioPro> socioProList = socioProService.findAll();
         model.addAttribute("employee", new Employee());
         model.addAttribute("posts",postsLists);
+        model.addAttribute("socioPro",socioProList);
         return "employee/add-employee";
     }
 

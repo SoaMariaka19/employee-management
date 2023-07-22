@@ -1,4 +1,4 @@
-package com.prog4.model;
+package com.prog4.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,9 +12,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class SocioPro {
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String categories;
+    private String nameOfPost;
 }

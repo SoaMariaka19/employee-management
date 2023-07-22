@@ -1,4 +1,4 @@
-package com.prog4.model;
+package com.prog4.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
