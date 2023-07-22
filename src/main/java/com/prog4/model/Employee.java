@@ -13,10 +13,13 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String lastName;
+    @Column(unique = true)
     private String firstName;
     private String dateOfBirth;
     private Sex sex;
+    @Column(unique = true)
     private String registrationNbr;
     private String phoneNbr;
     private String address;
@@ -26,7 +29,7 @@ public class Employee {
     private String emailPro;
     private String beggingDate;
     private String outDate;
-    private int nbrChildren;
+    private int nbrChildren = 0;
 
     /*
     * All foreign keys
