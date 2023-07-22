@@ -79,7 +79,6 @@
 
         <label for="cateSocioPro">Socio-Professional Category:</label>
         <select id="cateSocioPro" th:field="*{cateSocioPro}" required>
-          <!-- Add options based on your available SocioPro categories -->
         </select>
         <br/>
 
@@ -89,9 +88,10 @@
 
         <label for="postsList">Posts:</label>
         <select id="postsList" th:field="*{postsList}" required multiple>
-          <!-- Add options based on your available posts -->
+            <option th:each="post : ${posts}" th:value="${post.nameOfPost}" th:text="${post.nameOfPost}"></option>
         </select>
         <br/>
+
 
         <label for="nbrCnaps">CNAPS Number:</label>
         <input type="text" id="nbrCnaps" th:field="*{nbrCnaps}" required>
