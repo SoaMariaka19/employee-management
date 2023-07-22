@@ -31,6 +31,11 @@ public class EmployeeMapper {
         Cnaps cnaps = cnapsService.getById(restEmployee.getNbrCnaps().getId());
 
         String photo = Base64.getEncoder().encodeToString(restEmployee.getPhoto().getBytes());
+        if (restEmployee.getPhoto() != null && !photo.isEmpty()) {
+            restEmployee.setPhoto(restEmployee.getPhoto());
+        } else {
+            restEmployee.setPhoto(new CustomMultipartFile("aucune image"));
+        }
 
         employee.setId(restEmployee.getId());
         employee.setFirstName((restEmployee.getFirstName()));
