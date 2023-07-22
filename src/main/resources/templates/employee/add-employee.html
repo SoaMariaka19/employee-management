@@ -87,8 +87,11 @@
         <br/>
 
         <label for="postsList">Posts:</label>
-        <select id="postsList" th:field="*{postsList}" required multiple>
-            <option th:each="post : ${posts}" th:value="${post.nameOfPost}" th:text="${post.nameOfPost}"></option>
+        <select id="postsList" th:field="*{postsList}" required>
+            <option th:each="post : ${posts}" th:value="${post.nameOfPost}"
+                    th:text="${post.nameOfPost}"
+            >
+            </option>
         </select>
         <br/>
 
