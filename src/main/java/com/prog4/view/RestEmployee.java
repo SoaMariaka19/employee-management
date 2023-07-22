@@ -28,6 +28,6 @@ public class RestEmployee {
     private int nbrChildren;
     private SocioPro socioPro;
     private NationalCard cin;
-    private List<Posts> postsList;
+    private List<Post> postsList;
     private Cnaps nbrCnaps;
 }

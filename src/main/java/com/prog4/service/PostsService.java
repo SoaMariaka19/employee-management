@@ -1,6 +1,6 @@
 package com.prog4.service;
 
-import com.prog4.model.Posts;
+import com.prog4.model.Post;
 import com.prog4.repository.PostsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,17 +13,22 @@ import java.util.Optional;
 public class PostsService {
     private final PostsRepository repository;
 
-    public List<Posts> findAll(){
+    public List<Post> findAll(){
         return repository.findAll();
     }
 
-    public Posts getById(Long id){
-        Optional<Posts> optionalPosts = repository.findById(id);
-        Posts posts = new Posts();
+    public Post getById(Long id){
+        Optional<Post> optionalPosts = repository.findById(id);
+        Post posts = new Post();
 
         optionalPosts.ifPresent(value -> posts.setNameOfPost(value.getNameOfPost()));
         posts.setId(id);
 
         return posts;
+    }
+
+    public Post savePost(Post posts){
+        repository.save(posts);
+        return  this.getById(posts.getId());
     }
 }

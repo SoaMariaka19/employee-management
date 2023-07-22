@@ -25,7 +25,7 @@ public class EmployeeMapper {
 
     public Employee toEmployee(RestEmployee restEmployee) throws IOException {
         Employee employee = new Employee();
-        List<Posts> postsList = restEmployee.getPostsList();
+        List<Post> postsList = new ArrayList<>();
         NationalCard nationalCard = nationalCardService.findById(restEmployee.getCin().getId());
         SocioPro socioPro = socioProService.getById(restEmployee.getSocioPro().getId());
         Cnaps cnaps = cnapsService.getById(restEmployee.getNbrCnaps().getId());
@@ -35,6 +35,11 @@ public class EmployeeMapper {
             restEmployee.setPhoto(restEmployee.getPhoto());
         } else {
             restEmployee.setPhoto(new CustomMultipartFile("aucune image"));
+        }
+
+        for (Post post : restEmployee.getPostsList()){
+            Post tmp = postsService.getById(post.getId());
+            postsList.add(tmp);
         }
 
         employee.setId(restEmployee.getId());

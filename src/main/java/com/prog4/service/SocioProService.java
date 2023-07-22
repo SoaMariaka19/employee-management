@@ -1,8 +1,6 @@
 package com.prog4.service;
 
-import com.prog4.model.Posts;
 import com.prog4.model.SocioPro;
-import com.prog4.repository.PostsRepository;
 import com.prog4.repository.SocioProRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

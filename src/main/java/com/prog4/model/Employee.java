@@ -42,7 +42,7 @@ public class Employee {
     private NationalCard cin;
 
     @OneToMany
-    private List<Posts> postsList;
+    private List<Post> postsList;
 
     @OneToOne
     private Cnaps nbrCnaps;

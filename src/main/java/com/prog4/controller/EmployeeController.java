@@ -1,8 +1,10 @@
 package com.prog4.controller;
 
 import com.prog4.controller.mapper.EmployeeMapper;
+import com.prog4.model.Post;
+import com.prog4.service.PostsService;
+import com.prog4.service.validator.AlphanumericValidator;
 import com.prog4.view.RestEmployee;
-import com.prog4.model.CustomMultipartFile;
 import com.prog4.model.Employee;
 import com.prog4.service.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -22,34 +24,44 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
     private EmployeeMapper mapper;
+    private final PostsService postsService;
+    private final AlphanumericValidator validator;
     @GetMapping
     public String getAllEmployees(Model model){
         List<Employee> employees = employeeService.findAll();
         model.addAttribute("employees", employees);
 
-        return "list_employee";
+        return "employee/list_employee";
     }
 
     @GetMapping("/add")
     public String showAddEmployeeForm(Model model){
+        List<Post> postsLists = postsService.findAll();
         model.addAttribute("employee", new Employee());
-        model.addAttribute("errorMessage", "Registration number must be unique.");
-        return "add-employee";
+        model.addAttribute("posts",postsLists);
+        return "employee/add-employee";
     }
 
     @PostMapping("/add")
     public String addEmployee(
             @ModelAttribute("employee") RestEmployee restEmployee,
-            @RequestParam(value = "image", required = false) MultipartFile photo
+            @RequestParam(value = "image", required = false) MultipartFile photo,
+            Model modelError
     ) throws IOException {
+        Employee savedEmployee;
        try{
-           Employee employee = mapper.toEmployee(restEmployee);
+           if(validator.checkIfAlphanumeric(restEmployee.getCin().getNumber())){
+               Employee employee = mapper.toEmployee(restEmployee);
 
-           Employee savedEmployee = employeeService.save(employee);
-           return "redirect:/employees/" + savedEmployee.getId();
+               savedEmployee = employeeService.save(employee);
+               return "redirect:/employees/" + savedEmployee.getId();
+           }
+           modelError.addAttribute("cnapsError","cnaps number must be alphanumeric only [a-zA-Z0-9]");
+           return "employee/add-employee";
        }
        catch (DataIntegrityViolationException ex) {
-           return "add-employee";
+           modelError.addAttribute("errorMessage", "Registration number must be unique.");
+           return "employee/add-employee";
        }
     }
 
@@ -60,7 +72,7 @@ public class EmployeeController {
     ){
         Employee employee = employeeService.findById(id);
         model.addAttribute("employee", employee);
-        return "profiles";
+        return "employee/profiles";
     }
 
 }
