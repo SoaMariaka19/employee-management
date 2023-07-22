@@ -27,4 +27,9 @@ public class SocioProService {
 
         return socioPro;
     }
+
+    public SocioPro saveSocioPro(SocioPro socioPro){
+        repository.save(socioPro);
+        return this.getById(socioPro.getId());
+    }
 }
