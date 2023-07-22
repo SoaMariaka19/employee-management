@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee File</title>
+  <link rel="stylesheet" th:href="@{/style.css}" >
+
+</head>
+<body>
+<div class="link">
+  <a href="/employees">Employees list</a>
+  <a href="/">Back to home</a>
+</div>
+
+<h1>Employee File</h1>
+<div class="img-container">
+  <img th:src="'data:image/jpeg;base64,' + ${employee.image}" alt="Aucune image" />
+</div>
+<div class="container">
+  <p><span class="attribute">First Name : </span><span th:text="${employee.firstName}"></span></p>
+  <p><span class="attribute">Last Name : </span><span th:text="${employee.lastName}"></span></p>
+  <p><span class="attribute">Date of Birth : </span><span th:text="${employee.dateOfBirth}"></span></p>
+  <p><span class="attribute">Registration Number : </span><span th:text="${employee.registrationNbr}"></span></p>
+</div>
+</body>
+</html>
