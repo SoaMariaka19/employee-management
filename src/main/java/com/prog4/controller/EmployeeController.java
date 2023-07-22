@@ -6,6 +6,7 @@ import com.prog4.model.CustomMultipartFile;
 import com.prog4.model.Employee;
 import com.prog4.service.EmployeeService;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ public class EmployeeController {
     @GetMapping("/add")
     public String showAddEmployeeForm(Model model){
         model.addAttribute("employee", new Employee());
+        model.addAttribute("errorMessage", "Registration number must be unique.");
         return "add-employee";
     }
 
@@ -40,15 +42,15 @@ public class EmployeeController {
             @ModelAttribute("employee") RestEmployee restEmployee,
             @RequestParam(value = "image", required = false) MultipartFile photo
     ) throws IOException {
-        if (photo != null && !photo.isEmpty()) {
-            restEmployee.setPhoto(photo);
-        } else {
-            restEmployee.setPhoto(new CustomMultipartFile("aucune image"));
-        }
-        Employee employee = mapper.toEmployee(restEmployee);
+       try{
+           Employee employee = mapper.toEmployee(restEmployee);
 
-        Employee savedEmployee = employeeService.save(employee);
-        return "redirect:/employees/" + savedEmployee.getId();
+           Employee savedEmployee = employeeService.save(employee);
+           return "redirect:/employees/" + savedEmployee.getId();
+       }
+       catch (DataIntegrityViolationException ex) {
+           return "add-employee";
+       }
     }
 
 
