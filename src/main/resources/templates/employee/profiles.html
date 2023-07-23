@@ -27,7 +27,7 @@
     <p><span class="attribute">Adresse  : </span><span th:text="${employee.address}"></span></p>
     <p><span class="attribute">Postes :</span></p>
     <div th:each="post : ${suggestedPostProOptions}">
-      <p><b>* </b><span th:text="${employee.postsList}">
+      <p><b>* </b><span th:text="*{post.nameOfPost}">
       </span>
     </div>
   </div>

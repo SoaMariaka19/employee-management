@@ -11,6 +11,7 @@ import com.prog4.service.validator.AlphanumericValidator;
 import com.prog4.view.RestEmployee;
 import com.prog4.entity.Employee;
 import com.prog4.service.EmployeeService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @AllArgsConstructor
@@ -103,4 +105,38 @@ public class EmployeeController {
         Employee employee = mapper.toUpdate(socioPro , modelEmployee);
         return "redirect:/employees/" + employee.getId();
     }
+
+    @GetMapping("/export-csv")
+    public void exportCsv(HttpServletResponse response) throws IOException {
+        List<Employee> employees = employeeService.findAll();
+
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition", "attachment; filename=\"employees.csv\"");
+
+        try (PrintWriter writer = response.getWriter()) {
+            writer.println("First Name,Last Name,Date of Birth,Registration Number");
+            for (Employee employee : employees) {
+                writer.println(
+                        employee.getFirstName() + "," +
+                                employee.getLastName() + "," +
+                                employee.getDateOfBirth() + "," +
+                                employee.getSex() + "," +
+                                employee.getRegistrationNbr() + "," +
+                                employee.getPhoneNbr() + "," +
+                                employee.getAddress() + "," +
+                                employee.getEmailPerso() + "," +
+                                employee.getEmailPro() + "," +
+                                employee.getBeggingDate() + "," +
+                                employee.getOutDate() + "," +
+                                employee.getNbrChildren() + "," +
+                                employee.getCateSocioPro().getCategories() + "," +
+                                employee.getCin().getNumber() + "," +
+                                employee.getCin().getDate() + "," +
+                                employee.getCin().getPlace() + "," +
+                                employee.getNbrCnaps().getNbrCNAPS()
+                );
+            }
+        }
+    }
+
 }
