@@ -37,7 +37,7 @@ public class Employee {
     * All foreign keys
     *  */
 
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE})
     private SocioPro cateSocioPro;
 
     @OneToOne(cascade = CascadeType.ALL,
