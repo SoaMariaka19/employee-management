@@ -99,7 +99,7 @@
         <label>Posts:</label>
         <div th:each="post : ${posts}">
             <input type="checkbox" th:field="*{postsList}" th:value="${post.id}" id="${'post_' + post.id}">
-            <label th:for="${'post_' + post.id}" th:text="${post.nameOfPost}"></label>
+            <label th:for="*{id}" th:text="${post.nameOfPost}"></label>
         </div>
         <br/>
 
