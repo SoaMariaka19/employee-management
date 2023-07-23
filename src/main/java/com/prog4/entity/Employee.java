@@ -39,15 +39,12 @@ public class Employee {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE})
     private SocioPro cateSocioPro;
 
-    @OneToOne(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     private NationalCard cin;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Post> postsList;
 
-    @OneToOne(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     private Cnaps nbrCnaps;
 }

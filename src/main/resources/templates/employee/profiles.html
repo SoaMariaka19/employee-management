@@ -31,9 +31,9 @@
     <p><span class="attribute">Email personnel  : </span><span th:text="${employee.emailPerso}"></span></p>
     <p><span class="attribute">Date d'arrivée : </span><span th:text="${employee.beggingDate}"></span></p>
     <p><span class="attribute">Date de sortie : </span><span th:text="${employee.outDate}"></span></p>
-    <p><span class="attribute">Catégorie socio-Pro : </span><span th:text="${employee.cateSocioPro}"></span></p>
-    <p><span class="attribute">N° CIN: </span><span th:text="${employee.cin}"></span></p>
-    <p><span class="attribute">N° CNaps : </span><span th:text="${employee.nbrCnaps}"></span></p>
+    <p><span class="attribute">Catégorie socio-Pro : </span><span th:text="${employee.cateSocioPro.categories}"></span></p>
+    <p><span class="attribute">N° CIN: </span><span th:text="${employee.cin.number}"></span></p>
+    <p><span class="attribute">N° CNaps : </span><span th:text="${employee.nbrCnaps.nbrCNAPS}"></span></p>
   </div>
 </div>
 </body>
