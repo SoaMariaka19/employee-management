@@ -21,7 +21,7 @@ public class Employee {
     private String dateOfBirth;
     private Sex sex;
     @Column(unique = true)
-    private String registrationNbr;
+    private Long registrationNbr;
     private String phoneNbr;
     private String address;
     @Column(columnDefinition = "text")

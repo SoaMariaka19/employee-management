@@ -15,7 +15,7 @@
   <div class="title">
     <h1 th:text="${employee.firstName}"></h1>
     <img th:src="'data:image/jpeg;base64,' + ${employee.image}" alt="Aucune image" />
-    <span class="edit-btn">Edit</span>
+    <span class="edit-btn"><a th:href="@{'/employees/' + ${employee.id} + '/update'}">Edit</a> </span>
   </div>
   <div class="first-container">
     <p><span class="attribute">Prénom : </span><span th:text="${employee.firstName}"></span></p>
@@ -25,6 +25,11 @@
     <p><span class="attribute">Registration Number : </span><span th:text="${employee.registrationNbr}"></span></p>
     <p><span class="attribute">Numéro de Tel: </span><span th:text="${employee.phoneNbr}"></span></p>
     <p><span class="attribute">Adresse  : </span><span th:text="${employee.address}"></span></p>
+    <p><span class="attribute">Postes :</span></p>
+    <div th:each="post : ${suggestedPostProOptions}">
+      <p><b>* </b><span th:text="${employee.postsList}">
+      </span>
+    </div>
   </div>
   <div class="second-container">
     <p><span class="attribute">Email professionnel  : </span><span th:text="${employee.emailPro}"></span></p>

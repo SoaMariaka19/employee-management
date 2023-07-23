@@ -89,4 +89,18 @@ public class EmployeeController {
         return "employee/profiles";
     }
 
+    @GetMapping("/{id}/update")
+    public String showUpdateEmployeeForm(@PathVariable("id") Long employeeId, Model model) {
+        Employee employee = employeeService.findById(employeeId);
+        model.addAttribute("newEmployee", employee);
+        return "employee/update-employee";
+    }
+
+    @PostMapping("/update")
+    public String updateEmployee(@ModelAttribute("newEmployee") Employee modelEmployee) throws IOException {
+        SocioPro socioPro = socioProService.getByCategory(modelEmployee.getCateSocioPro().getCategories());
+        socioPro.setCategories(modelEmployee.getCateSocioPro().getCategories());
+        Employee employee = mapper.toUpdate(socioPro , modelEmployee);
+        return "redirect:/employees/" + employee.getId();
+    }
 }

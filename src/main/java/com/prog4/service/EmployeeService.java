@@ -26,4 +26,8 @@ public class EmployeeService {
         repository.save(employees);
         return this.findById(employees.getId());
     }
+
+    public Employee findByRegisterNumber(Long number){
+        return repository.findByRegistrationNbr(number);
+    }
 }

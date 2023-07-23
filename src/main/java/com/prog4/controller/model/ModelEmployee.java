@@ -17,7 +17,7 @@ public class ModelEmployee {
     private String firstName;
     private String dateOfBirth;
     private Sex sex;
-    private String registrationNbr;
+    private Long registrationNbr;
     private String phoneNbr;
     private String address;
     private MultipartFile photo;

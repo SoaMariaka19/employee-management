@@ -21,16 +21,13 @@ public class EmployeeMapper {
     private CnapsService cnapsService;
     private EmployeeService service;
     private SocioProService socioProService;
-
     public Employee toEntity(ModelEmployee employee) throws IOException {
-        Cnaps cnaps = cnapsService.getByNumber(employee.getNbrCnaps());
-
         SocioPro socioPro = employee.getSocioPro() != null ? socioProService.getById(employee.getSocioPro()) : null;
-        socioProService.saveSocioPro(socioPro);
         NationalCard nationalCard = nationalCardService.getByNumber(employee.getCinNumber());
         nationalCard.setDate(employee.getCinDate());
         nationalCard.setPlace(employee.getCinPlace());
         nationalCard.setNumber(employee.getCinNumber());
+        Cnaps cnaps = cnapsService.getByNumber(employee.getNbrCnaps());
 
         String photo = Base64.getEncoder().encodeToString(employee.getPhoto().getBytes());
         if (employee.getPhoto() != null && !photo.isEmpty()) {
@@ -63,6 +60,27 @@ public class EmployeeMapper {
                 .nbrChildren(employee.getNbrChildren())
                 .address(employee.getAddress())
                 .build();
+        service.save(employee1);
+        return employee1;
+    }
+    public Employee toUpdate(SocioPro socioPro , Employee employee) throws IOException {
+        Employee employee1 = service.findByRegisterNumber(employee.getRegistrationNbr());
+        employee1.setSex(employee.getSex());
+        employee1.setPhoneNbr(employee.getPhoneNbr());
+        employee1.setPostsList(employee.getPostsList());
+        employee1.setOutDate(employee.getOutDate());
+        employee1.setNbrChildren(employee.getNbrChildren());
+        employee1.setFirstName(employee.getFirstName());
+        employee1.setLastName(employee.getLastName());
+        employee1.setImage(employee.getImage());
+        employee1.setCin(employee.getCin());
+        employee1.setAddress(employee.getAddress());
+        employee1.setEmailPro(employee.getEmailPro());
+        employee1.setEmailPerso(employee.getEmailPerso());
+        employee1.setDateOfBirth(employee.getDateOfBirth());
+        employee1.setRegistrationNbr(employee.getRegistrationNbr());
+        employee1.setCateSocioPro(socioPro);
+        employee1.setNbrCnaps(employee.getNbrCnaps());
         service.save(employee1);
         return employee1;
     }

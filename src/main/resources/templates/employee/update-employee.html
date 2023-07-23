@@ -11,21 +11,22 @@
 <body>
 <div th:replace="fragments/header"></div>
 <h1>Update Employee</h1>
-<form th:object="${employee}" th:action="@{/employees/update}" method="post" enctype="multipart/form-data">
+<form th:object="${newEmployee}" th:action="@{/employees/update}" method="post" enctype="multipart/form-data">
+
     <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" th:text="*{firstName}" th:field="*{firstName}" />
+    <input type="text" id="firstName" th:field="*{firstName}" required/>
     <br/>
 
     <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" th:field="*{lastName}" />
+    <input type="text" id="lastName" th:field="*{lastName}" required/>
     <br/>
 
     <label for="dateOfBirth">Date of Birth:</label>
-    <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}"  pattern="yyyy-MM-dd"/>
+    <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" required pattern="yyyy-MM-dd"/>
     <br/>
 
     <label for="sex">Sex:</label>
-    <select id="sex" th:field="*{sex}" >
+    <select id="sex" th:field="*{sex}" required>
         <option th:each="sexOption : ${sexOptions}"
                 th:value="${sexOption}"
                 th:text="${sexOption.name()}">
@@ -34,25 +35,25 @@
     <br/>
 
     <label for="registrationNbr">Registration Number:</label>
-    <input type="text" id="registrationNbr" th:field="*{registrationNbr}" >
+    <input type="text" id="registrationNbr" th:field="*{registrationNbr}" required>
     <br/>
 
     <p th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></p>
 
     <label for="phoneNbr">Phone Number:</label>
-    <input type="text" id="phoneNbr" th:field="*{phoneNbr}" >
+    <input type="text" id="phoneNbr" th:field="*{phoneNbr}" required>
     <br/>
 
     <label for="address">Address:</label>
-    <input type="text" id="address" th:field="*{address}" >
+    <input type="text" id="address" th:field="*{address}" required>
     <br/>
 
-    <label for="photo">Identity Photo:</label>
-    <input type="file" id="photo" name="photo" th:field="*{photo}">
-    <br/>
+    <!--<label for="photo">Identity Photo:</label>
+    <input type="file" id="photo" name="photo" th:field="*{image}">
+    <br/>-->
 
     <label for="beggingDate">Hiring Date:</label>
-    <input type="date" id="beggingDate" th:field="*{beggingDate}"  pattern="yyyy-MM-dd"/>
+    <input type="date" id="beggingDate" th:field="*{beggingDate}" required pattern="yyyy-MM-dd"/>
     <br/>
 
     <label for="outDate">Departure Date:</label>
@@ -60,19 +61,19 @@
     <br/>
 
     <label for="emailPerso">Personal Email:</label>
-    <input type="email" id="emailPerso" th:field="*{emailPerso}" >
+    <input type="email" id="emailPerso" th:field="*{emailPerso}" required>
     <br/>
 
     <label for="emailPro">Professional Email:</label>
-    <input type="email" id="emailPro" th:field="*{emailPro}" >
+    <input type="email" id="emailPro" th:field="*{emailPro}" required>
     <br/>
 
     <label for="nbrChildren">Number of Children:</label>
-    <input type="number" id="nbrChildren" th:field="*{nbrChildren}" >
+    <input type="number" id="nbrChildren" th:field="*{nbrChildren}" required>
     <br/>
 
     <label for="socioPro">Socio-Professional Category:</label>
-    <select id="socioPro" th:field="*{socioPro}" >
+    <select id="socioPro" th:field="*{cateSocioPro.categories}" required>
         <option value="">-- Select Socio-Professional Category --</option>
         <option th:each="socioProOption : ${suggestedSocioProOptions}"
                 th:value="${socioProOption.categories}"
@@ -83,33 +84,32 @@
 
 
     <label for="cin">National Card:</label>
-    <input type="text" id="cin" th:field="*{cinNumber}" >
+    <input type="text" id="cin" th:field="*{cin.number}" required>
     <br/>
 
-    <p style="color: red" th:if="${cinAlphanumericError}" class="cinError" th:text="${cinAlphanumericError}"></p>
-
     <label for="cinPlace">National Card Place:</label>
-    <input type="text" id="cinPlace" th:field="*{cinPlace}" >
+    <input type="text" id="cinPlace" th:field="*{cin.place}" required>
     <br/>
 
     <label for="cinDate">National Card Date:</label>
-    <input type="date" id="cinDate" th:field="*{cinDate}" pattern="yyyy-MM-dd"/>
+    <input type="date" id="cinDate" th:field="*{cin.date}" pattern="yyyy-MM-dd"/>
     <br/>
 
     <label>Posts:</label>
-    <div class="check-box" th:each="post : ${suggestedPostProOptions}">
-        <label th:for="*{id}" th:text="${post.nameOfPost}"></label>
+    <div th:each="post : ${suggestedPostProOptions}">
         <input type="checkbox" th:field="*{postsList}" th:value="*{id}" id="${post.id}">
+        <label th:for="*{id}" th:text="${post.nameOfPost}"></label>
     </div>
     <br/>
 
 
     <label for="nbrCnaps">CNAPS Number:</label>
-    <input type="text" id="nbrCnaps" th:field="*{nbrCnaps}" >
+    <input type="text" id="nbrCnaps" th:field="*{nbrCnaps.nbrCNAPS}" required>
     <br/>
-    <p style="color: red" th:if="${cnapsError}" class="cinError" th:text="${cnapsError}"></p>
+    <p th:if="${cnapsError}" class="cinError" th:text="${cnapsError}"></p>
 
     <button type="submit">Update</button>
+
 </form>
 </body>
 </html>
