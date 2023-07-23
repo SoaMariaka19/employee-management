@@ -1,6 +1,7 @@
 package com.prog4.entity;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@EqualsAndHashCode
 public class Business {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

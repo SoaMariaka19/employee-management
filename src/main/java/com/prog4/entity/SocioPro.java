@@ -9,6 +9,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
+@EqualsAndHashCode
 public class SocioPro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

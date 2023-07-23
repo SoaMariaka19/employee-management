@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@EqualsAndHashCode
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
