@@ -66,15 +66,12 @@ public class EmployeeController {
             Model modelError
     ) throws IOException {
        try{
-//           if(validator.checkIfAlphanumeric(modelEmployee.getCinNumber())){
-//               Employee employee = mapper.toEntity(modelEmployee);
-//
-//               savedEmployee = employeeService.save(employee);
-//               return "redirect:/employees/" + savedEmployee.getId();
-//           }
-            Employee employee = mapper.toEntity(modelEmployee);
+           if(validator.checkIfAlphanumeric(modelEmployee.getCinNumber())){
+               Employee employee = mapper.toEntity(modelEmployee);
+               return "redirect:/employees/" + employee.getId();
+           }
             modelError.addAttribute("cnapsError","cnaps number must be alphanumeric only [a-zA-Z0-9]");
-            return "redirect:/employees/" + employee.getId();
+            return "employee/add-employee";
        }
        catch (DataIntegrityViolationException ex) {
            modelError.addAttribute("errorMessage", "Registration number must be unique.");
