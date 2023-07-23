@@ -9,8 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 </head>
 <body>
+<div th:replace="fragments/header"></div>
 <h1>Add Employee</h1>
-  <div class="form-page" style="display: block;">
+ <!-- <div class="form-page" style="display: block;"> -->
     <form th:object="${employee}" th:action="@{/employees/add}" method="post" enctype="multipart/form-data">
 
         <label for="firstName">First Name:</label>
@@ -27,8 +28,10 @@
 
         <label for="sex">Sex:</label>
         <select id="sex" th:field="*{sex}" required>
-          <option value="H">Male</option>
-          <option value="F">Female</option>
+            <option th:each="sexOption : ${sexOptions}"
+                    th:value="${sexOption}"
+                    th:text="${sexOption.name()}">
+            </option>
         </select>
         <br/>
 
@@ -46,22 +49,15 @@
         <input type="text" id="address" th:field="*{address}" required>
         <br/>
 
-        <label for="image">Identity Photo:</label>
-        <input type="file" id="image" name="photo" th:field="*{image}">
+        <label for="photo">Identity Photo:</label>
+        <input type="file" id="photo" name="photo" th:field="*{photo}">
         <br/>
 
         <label for="beggingDate">Hiring Date:</label>
           <input type="date" id="beggingDate" th:field="*{beggingDate}" required pattern="yyyy-MM-dd"/>
         <br/>
 
-      <button type="button" onclick="nextPage()">Next</button>
-    </form>
-  </div>
-
-  <div class="form-page" style="display: none;">
-    <form th:object="${employee}" th:action="@{/employees/add}" method="post" enctype="multipart/form-data">
-
-        <label for="outDate">Departure Date:</label>
+       <label for="outDate">Departure Date:</label>
         <input type="date" id="outDate" th:field="*{outDate}" pattern="yyyy-MM-dd"/>
         <br/>
 
@@ -77,27 +73,34 @@
         <input type="number" id="nbrChildren" th:field="*{nbrChildren}" required>
         <br/>
 
-        <label for="cateSocioPro">Socio-Professional Category:</label>
-        <select id="cateSocioPro" th:field="*{cateSocioPro}" required>
-            <option th:each="socio : ${socioPro}" th:value="${socio.categories}"
-                    th:text="${socio.categories}"
-            >
-
+        <label for="socioPro">Socio-Professional Category:</label>
+        <select id="socioPro" th:field="*{socioPro}" required>
+            <option value="">-- Select Socio-Professional Category --</option>
+            <option th:each="socioProOption : ${suggestedSocioProOptions}"
+                    th:value="${socioProOption.id}"
+                    th:text="${socioProOption.categories}">
             </option>
         </select>
         <br/>
+
 
         <label for="cin">National Card:</label>
-        <input type="text" id="cin" th:field="*{cin}" required>
+        <input type="text" id="cin" th:field="*{cinNumber}" required>
         <br/>
 
-        <label for="postsList">Posts:</label>
-        <select id="postsList" th:field="*{postsList}" required>
-            <option th:each="post : ${posts}" th:value="${post.nameOfPost}"
-                    th:text="${post.nameOfPost}"
-            >
-            </option>
-        </select>
+        <label for="cinPlace">National Card Place:</label>
+        <input type="text" id="cinPlace" th:field="*{cinPlace}" required>
+        <br/>
+
+        <label for="cinDate">National Card Date:</label>
+        <input type="date" id="cinDate" th:field="*{cinDate}" pattern="yyyy-MM-dd"/>
+        <br/>
+
+        <label>Posts:</label>
+        <div th:each="post : ${posts}">
+            <input type="checkbox" th:field="*{postsList}" th:value="${post.id}" id="${'post_' + post.id}">
+            <label th:for="${'post_' + post.id}" th:text="${post.nameOfPost}"></label>
+        </div>
         <br/>
 
 
@@ -107,13 +110,19 @@
         <p th:if="${cnapsError}" class="cinError" th:text="${cnapsError}"></p>
 
         <button type="submit">Add</button>
-      <button type="button" onclick="prevPage()">Previous</button>
     </form>
-  </div>
 
 </body>
 <script>
-  function showPage(pageNumber) {
+    const postsList = document.getElementById("postsList");
+    postsList.addEventListener("change", function() {
+        if (this.selectedOptions.length > 1) {
+            this.setAttribute("multiple", "multiple");
+        } else {
+            this.removeAttribute("multiple");
+        }
+    });
+  /*function showPage(pageNumber) {
     const pages = document.querySelectorAll('.form-page');
     for (let i = 0; i < pages.length; i++) {
       pages[i].style.display = i === pageNumber ? 'block' : 'none';
@@ -126,6 +135,6 @@
 
   function prevPage() {
     showPage(0);
-  }
+  }*/
 </script>
 </html>

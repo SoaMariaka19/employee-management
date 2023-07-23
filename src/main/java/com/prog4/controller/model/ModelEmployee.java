@@ -21,13 +21,21 @@ public class ModelEmployee {
     private String phoneNbr;
     private String address;
     private MultipartFile photo;
+    public MultipartFile getPhoto() {
+        return photo;
+    }
+    public void setPhoto(MultipartFile photo) {
+        this.photo = photo;
+    }
     private String emailPerso;
     private String emailPro;
     private String beggingDate;
     private String outDate;
     private int nbrChildren;
-    private String socioPro;
-    private String cin;
-    private String postsList;
+    private Long socioPro;
+    private String cinNumber;
+    private String cinDate;
+    private String cinPlace;
+    private List<String> postsList;
     private String nbrCnaps;
 }

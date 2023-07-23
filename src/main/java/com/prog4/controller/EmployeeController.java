@@ -1,7 +1,9 @@
 package com.prog4.controller;
 
 import com.prog4.controller.mapper.EmployeeMapper;
+import com.prog4.controller.model.ModelEmployee;
 import com.prog4.entity.Post;
+import com.prog4.entity.Sex;
 import com.prog4.entity.SocioPro;
 import com.prog4.service.PostsService;
 import com.prog4.service.SocioProService;
@@ -37,32 +39,39 @@ public class EmployeeController {
         return "employee/list_employee";
     }
 
+    @ModelAttribute("sexOptions")
+    public Sex[] getSexOptions() {
+        return Sex.values();
+    }
+
+    @ModelAttribute("suggestedSocioProOptions")
+    public List<SocioPro> getSuggestedSocioProOptions() {
+        return socioProService.findAll();
+    }
+
     @GetMapping("/add")
     public String showAddEmployeeForm(Model model){
         List<Post> postsLists = postsService.findAll();
-        List<SocioPro> socioProList = socioProService.findAll();
-        model.addAttribute("employee", new Employee());
+        model.addAttribute("employee", new ModelEmployee());
         model.addAttribute("posts",postsLists);
-        model.addAttribute("socioPro",socioProList);
         return "employee/add-employee";
     }
 
     @PostMapping("/add")
     public String addEmployee(
-            @ModelAttribute("employee") RestEmployee restEmployee,
-            @RequestParam(value = "image", required = false) MultipartFile photo,
+            @ModelAttribute("employee") ModelEmployee modelEmployee,
             Model modelError
     ) throws IOException {
-        Employee savedEmployee;
        try{
-           if(validator.checkIfAlphanumeric(restEmployee.getCin().getNumber())){
-               Employee employee = mapper.toEmployee(restEmployee);
-
-               savedEmployee = employeeService.save(employee);
-               return "redirect:/employees/" + savedEmployee.getId();
-           }
-           modelError.addAttribute("cnapsError","cnaps number must be alphanumeric only [a-zA-Z0-9]");
-           return "employee/add-employee";
+//           if(validator.checkIfAlphanumeric(modelEmployee.getCinNumber())){
+//               Employee employee = mapper.toEntity(modelEmployee);
+//
+//               savedEmployee = employeeService.save(employee);
+//               return "redirect:/employees/" + savedEmployee.getId();
+//           }
+            Employee employee = mapper.toEntity(modelEmployee);
+            modelError.addAttribute("cnapsError","cnaps number must be alphanumeric only [a-zA-Z0-9]");
+            return "redirect:/employees/" + employee.getId();
        }
        catch (DataIntegrityViolationException ex) {
            modelError.addAttribute("errorMessage", "Registration number must be unique.");

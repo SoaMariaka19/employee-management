@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
-
 @NoArgsConstructor
 @Entity
 @Getter
@@ -20,7 +18,6 @@ public class NationalCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String number;
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
-    private Date date;
+    private String date;
     private String place;
 }

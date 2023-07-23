@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" th:href="@{/style.css}" >
+    <!--<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+    <!--<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    -->
 </head>
 <body>
-    <div th:replace="navigation-bar"></div>
-    <div th:fragment="content">
-    </div>
+    <div th:replace="fragments/header"></div>
 </body>
 </html>

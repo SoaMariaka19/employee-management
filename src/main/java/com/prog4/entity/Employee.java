@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.util.List;
 
+@AllArgsConstructor
+@Builder
 @NoArgsConstructor
 @Entity
 @Getter
@@ -35,15 +37,18 @@ public class Employee {
     * All foreign keys
     *  */
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE})
     private SocioPro cateSocioPro;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     private NationalCard cin;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     private List<Post> postsList;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
     private Cnaps nbrCnaps;
 }

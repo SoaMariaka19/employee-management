@@ -28,4 +28,18 @@ public class NationalCardService {
         nationalCard1.setId(id);
         return nationalCard1;
     }
+
+    public void save(NationalCard card){
+        repository.save(card);
+    }
+    public NationalCard getByNumber(String number){
+        Optional<NationalCard> nationalCard = repository.findNationalCardByNumberEqualsIgnoreCase(number);
+        NationalCard nationalCard1 = new NationalCard();
+        if(nationalCard.isPresent()){
+            nationalCard1.setDate(nationalCard.get().getDate());
+            nationalCard1.setNumber(nationalCard.get().getNumber());
+            nationalCard1.setPlace(nationalCard.get().getPlace());
+        }
+        return nationalCard1;
+    }
 }

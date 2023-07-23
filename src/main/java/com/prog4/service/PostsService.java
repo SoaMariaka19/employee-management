@@ -26,7 +26,12 @@ public class PostsService {
 
         return posts;
     }
-
+    public Post getByName(String name){
+        Optional<Post> optionalPosts = repository.findByNameOfPostIgnoreCase(name);
+        Post posts = new Post();
+        optionalPosts.ifPresent(value -> posts.setNameOfPost(value.getNameOfPost()));
+        return posts;
+    }
     public Post savePost(Post posts){
         repository.save(posts);
         return  this.getById(posts.getId());
