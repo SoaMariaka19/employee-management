@@ -4,29 +4,39 @@
       <div class="modal-body">
         <div class="modal-body">
           <form th:action="@{/employees/filter}" method="get">
-            <div class="mb-3">
-              <label for="lastName" class="form-label">Last Name:</label>
-              <input type="text" class="form-control" id="lastName" name="lastName">
-            </div>
-            <div class="mb-3">
-              <label for="firstName" class="form-label">First Name:</label>
-              <input type="text" class="form-control" id="firstName" name="firstName">
-            </div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" th:value="${param.lastName}"/>
 
-            <div class="mb-3">
-              <label for="sortBy" class="form-label">Sort By:</label>
-              <select class="form-select" id="sortBy" name="sortBy">
-                <option value="lastName">Last Name</option>
-                <option value="firstName">First Name</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="sortOrder" class="form-label">Sort Order:</label>
-              <select class="form-select" id="sortOrder" name="sortOrder">
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
-              </select>
-            </div>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" th:value="${param.firstName}"/>
+
+            <label for="sex">Sex:</label>
+            <select id="sex" name="sex">
+              <option value="">-- All --</option>
+              <option value="M" th:selected="${param.sex == 'M'}">Male</option>
+              <option value="F" th:selected="${param.sex == 'F'}">Female</option>
+            </select>
+
+            <label for="postName">Post Name:</label>
+            <input type="text" id="postName" name="postName" th:value="${param.postName}"/>
+
+            <label for="minHireDate">Min Hire Date:</label>
+            <input type="date" id="minHireDate" name="minHireDate" th:value="${param.minHireDate}"/>
+
+            <label for="maxHireDate">Max Hire Date:</label>
+            <input type="date" id="maxHireDate" name="maxHireDate" th:value="${param.maxHireDate}"/>
+
+            <label for="minLeaveDate">Min Leave Date:</label>
+            <input type="date" id="minLeaveDate" name="minLeaveDate" th:value="${param.minLeaveDate}"/>
+
+            <label for="maxLeaveDate">Max Leave Date:</label>
+            <input type="date" id="maxLeaveDate" name="maxLeaveDate" th:value="${param.maxLeaveDate}"/>
+
+            <label for="sort">Sort:</label>
+            <select id="sort" name="sort">
+              <option value="asc" th:selected="${param.sort == 'asc'}">Ascending</option>
+              <option value="desc" th:selected="${param.sort == 'desc'}">Descending</option>
+            </select>
             <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="hideModal()">Close</button>
             <button type="submit" class="btn btn-primary">Apply Filters</button>
           </form>
