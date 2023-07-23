@@ -49,11 +49,14 @@ public class EmployeeController {
         return socioProService.findAll();
     }
 
+    @ModelAttribute("suggestedPostProOptions")
+    public List<Post> getSuggestedPostProOptions() {
+        return postsService.findAll();
+    }
+
     @GetMapping("/add")
     public String showAddEmployeeForm(Model model){
-        List<Post> postsLists = postsService.findAll();
         model.addAttribute("employee", new ModelEmployee());
-        model.addAttribute("posts",postsLists);
         return "employee/add-employee";
     }
 
