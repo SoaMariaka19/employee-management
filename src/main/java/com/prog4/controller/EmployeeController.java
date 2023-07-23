@@ -9,7 +9,6 @@ import com.prog4.repository.EmployeeRepository;
 import com.prog4.service.PostsService;
 import com.prog4.service.SocioProService;
 import com.prog4.service.validator.AlphanumericValidator;
-import com.prog4.view.RestEmployee;
 import com.prog4.entity.Employee;
 import com.prog4.service.EmployeeService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,11 +19,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Comparator;
 import java.util.List;
 
 @AllArgsConstructor

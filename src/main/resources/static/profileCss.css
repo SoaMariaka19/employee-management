@@ -52,7 +52,7 @@ label {
     gap: 12px;
 }
 
-img{
+.employee_image{
     border: 1px transparent;
     width: 200px;
     height: 200px;

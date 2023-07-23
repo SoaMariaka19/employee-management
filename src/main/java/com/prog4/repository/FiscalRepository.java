@@ -1,9 +1,9 @@
 package com.prog4.repository;
 
-import com.prog4.entity.Business;
+import com.prog4.entity.Fiscal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BusinessRepository extends JpaRepository<Business , Long> {
+public interface FiscalRepository extends JpaRepository<Fiscal , Long> {
 }

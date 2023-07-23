@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 </head>
 <body>
-<div th:replace="fragments/header"></div>
+<div th:replace="/index"></div>
 <h1>Add Employee</h1>
  <!-- <div class="form-page" style="display: block;"> -->
     <form th:object="${employee}" th:action="@{/employees/add}" method="post" enctype="multipart/form-data">
@@ -39,7 +39,7 @@
         <input type="text" id="registrationNbr" th:field="*{registrationNbr}" required>
         <br/>
 
-          <p th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></p>
+          <p style="color: red" th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></p>
 
         <label for="phoneNbr">Phone Number:</label>
         <input type="text" id="phoneNbr" th:field="*{phoneNbr}" required>
@@ -88,6 +88,8 @@
         <input type="text" id="cin" th:field="*{cinNumber}" required>
         <br/>
 
+        <p style="color: red" th:if="${cnapsError}" class="cinError" th:text="${cnapsError}"></p>
+
         <label for="cinPlace">National Card Place:</label>
         <input type="text" id="cinPlace" th:field="*{cinPlace}" required>
         <br/>
@@ -107,7 +109,6 @@
         <label for="nbrCnaps">CNAPS Number:</label>
         <input type="text" id="nbrCnaps" th:field="*{nbrCnaps}" required>
         <br/>
-        <p th:if="${cnapsError}" class="cinError" th:text="${cnapsError}"></p>
 
         <button type="submit">Add</button>
     </form>

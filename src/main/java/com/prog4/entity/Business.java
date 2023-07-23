@@ -1,16 +1,15 @@
 package com.prog4.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @Entity
 @Getter
 @Setter
 @EqualsAndHashCode
+@Builder
+@AllArgsConstructor
 public class Business {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +24,9 @@ public class Business {
     private String email;
     @Column(unique = true)
     private String phone;
+    @Column(columnDefinition = "text")
     private String logo;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Fiscal idFiscal;
 }

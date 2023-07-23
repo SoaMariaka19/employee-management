@@ -10,11 +10,11 @@
 
 </head>
 <body>
-<div th:replace="fragments/header"></div>
+<div th:replace="/index"></div>
 <div class="content">
   <div class="title">
     <h1 th:text="${employee.firstName}"></h1>
-    <img th:src="'data:image/jpeg;base64,' + ${employee.image}" alt="Aucune image" />
+    <img class="employee_image" th:src="'data:image/jpeg;base64,' + ${employee.image}" alt="Aucune image" />
     <span class="edit-btn"><a th:href="@{'/employees/' + ${employee.id} + '/update'}">Edit</a> </span>
   </div>
   <div class="first-container">

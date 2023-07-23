@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 </head>
 <body>
-<div th:replace="fragments/header"></div>
+<div th:replace="/index"></div>
 <h1>Update Employee</h1>
 <form th:object="${newEmployee}" th:action="@{/employees/update}" method="post" enctype="multipart/form-data">
 
@@ -48,9 +48,9 @@
     <input type="text" id="address" th:field="*{address}" required>
     <br/>
 
-    <!--<label for="photo">Identity Photo:</label>
+    <label for="photo">Identity Photo:</label>
     <input type="file" id="photo" name="photo" th:field="*{image}">
-    <br/>-->
+    <br/>
 
     <label for="beggingDate">Hiring Date:</label>
     <input type="date" id="beggingDate" th:field="*{beggingDate}" required pattern="yyyy-MM-dd"/>

@@ -245,3 +245,10 @@ select:focus {
     color: #ffffff;
     background-color: #262424;
 }
+
+.business_logo{
+    border: 1px transparent;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+}
