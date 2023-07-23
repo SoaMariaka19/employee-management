@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Employee File</title>
-  <link rel="stylesheet" th:href="@{/style.css}" >
+  <link rel="stylesheet" th:href="@{/profileCss.css}" >
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
@@ -11,28 +11,29 @@
 </head>
 <body>
 <div th:replace="fragments/header"></div>
-<div class="link">
-  <a href="/employees">Employees list</a>
-  <a href="/static">Back to home</a>
-</div>
-
-<h1>Employee File</h1>
-<div class="img-container">
-  <img th:src="'data:image/jpeg;base64,' + ${employee.image}" alt="Aucune image" />
-</div>
-<div class="container">
-  <p><span class="attribute">Prénom : </span><span th:text="${employee.firstName}"></span></p>
-  <p><span class="attribute">Nom : </span><span th:text="${employee.lastName}"></span></p>
-  <p><span class="attribute">Date de naissance : </span><span th:text="${employee.dateOfBirth}"></span></p>
-  <p><span class="attribute">Sexe  : </span><span th:text="${employee.sex}"></span></p>
-  <p><span class="attribute">Registration Number : </span><span th:text="${employee.registrationNbr}"></span></p>
-  <p><span class="attribute">Numéro de Tel: </span><span th:text="${employee.phoneNbr}"></span></p>
-  <p><span class="attribute">Adresse  : </span><span th:text="${employee.address}"></span></p>
-  <p><span class="attribute">Email professionnel  : </span><span th:text="${employee.emailPro}"></span></p>
-  <p><span class="attribute">Email personnel  : </span><span th:text="${employee.emailPerso}"></span></p>
-  <p><span class="attribute">Date d'arrivée : </span><span th:text="${employee.beggingDate}"></span></p>
-  <p><span class="attribute">Date de sortie : </span><span th:text="${employee.outDate}"></span></p>
-  <p><span class="attribute">Nombre d'enfant : </span><span th:text="${employee.nbrChildren}"></span></p>
+<div class="content">
+  <div class="title">
+    <h1 th:text="${employee.firstName}"></h1>
+    <img th:src="'data:image/jpeg;base64,' + ${employee.image}" alt="Aucune image" />
+  </div>
+  <div class="first-container">
+    <p><span class="attribute">Prénom : </span><span th:text="${employee.firstName}"></span></p>
+    <p><span class="attribute">Nom : </span><span th:text="${employee.lastName}"></span></p>
+    <p><span class="attribute">Date de naissance : </span><span th:text="${employee.dateOfBirth}"></span></p>
+    <p><span class="attribute">Sexe  : </span><span th:text="${employee.sex}"></span></p>
+    <p><span class="attribute">Registration Number : </span><span th:text="${employee.registrationNbr}"></span></p>
+    <p><span class="attribute">Numéro de Tel: </span><span th:text="${employee.phoneNbr}"></span></p>
+    <p><span class="attribute">Adresse  : </span><span th:text="${employee.address}"></span></p>
+  </div>
+  <div class="second-container">
+    <p><span class="attribute">Email professionnel  : </span><span th:text="${employee.emailPro}"></span></p>
+    <p><span class="attribute">Email personnel  : </span><span th:text="${employee.emailPerso}"></span></p>
+    <p><span class="attribute">Date d'arrivée : </span><span th:text="${employee.beggingDate}"></span></p>
+    <p><span class="attribute">Date de sortie : </span><span th:text="${employee.outDate}"></span></p>
+    <p><span class="attribute">Nombre d'enfant : </span><span th:text="${employee.cateSocioPro}"></span></p>
+    <p><span class="attribute">Nombre d'enfant : </span><span th:text="${employee.cin}"></span></p>
+    <p><span class="attribute">Nombre d'enfant : </span><span th:text="${employee.nbrCnaps}"></span></p>
+  </div>
 </div>
 </body>
 </html>
