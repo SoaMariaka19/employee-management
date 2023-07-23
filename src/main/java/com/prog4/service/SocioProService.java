@@ -31,7 +31,7 @@ public class SocioProService {
         return repository.findSocioProByCategoriesIgnoreCase(category);
     }
     public void saveSocioPro(SocioPro socioPro){
-        repository.saveAndFlush(socioPro);
+        repository.save(socioPro);
         this.getById(socioPro.getId());
     }
 }
