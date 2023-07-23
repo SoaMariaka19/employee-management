@@ -15,6 +15,7 @@
   <div class="title">
     <h1 th:text="${employee.firstName}"></h1>
     <img th:src="'data:image/jpeg;base64,' + ${employee.image}" alt="Aucune image" />
+    <span class="edit-btn">Edit</span>
   </div>
   <div class="first-container">
     <p><span class="attribute">Prénom : </span><span th:text="${employee.firstName}"></span></p>
@@ -30,9 +31,9 @@
     <p><span class="attribute">Email personnel  : </span><span th:text="${employee.emailPerso}"></span></p>
     <p><span class="attribute">Date d'arrivée : </span><span th:text="${employee.beggingDate}"></span></p>
     <p><span class="attribute">Date de sortie : </span><span th:text="${employee.outDate}"></span></p>
-    <p><span class="attribute">Nombre d'enfant : </span><span th:text="${employee.cateSocioPro}"></span></p>
-    <p><span class="attribute">Nombre d'enfant : </span><span th:text="${employee.cin}"></span></p>
-    <p><span class="attribute">Nombre d'enfant : </span><span th:text="${employee.nbrCnaps}"></span></p>
+    <p><span class="attribute">Catégorie socio-Pro : </span><span th:text="${employee.cateSocioPro}"></span></p>
+    <p><span class="attribute">N° CIN: </span><span th:text="${employee.cin}"></span></p>
+    <p><span class="attribute">N° CNaps : </span><span th:text="${employee.nbrCnaps}"></span></p>
   </div>
 </div>
 </body>
