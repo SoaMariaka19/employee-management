@@ -5,6 +5,7 @@ import com.prog4.controller.model.ModelEmployee;
 import com.prog4.entity.Post;
 import com.prog4.entity.Sex;
 import com.prog4.entity.SocioPro;
+import com.prog4.repository.EmployeeRepository;
 import com.prog4.service.PostsService;
 import com.prog4.service.SocioProService;
 import com.prog4.service.validator.AlphanumericValidator;
@@ -14,6 +15,8 @@ import com.prog4.service.EmployeeService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Comparator;
 import java.util.List;
 
 @AllArgsConstructor
@@ -30,6 +34,7 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
     private final PostsService postsService;
+    private final EmployeeRepository repository;
     private final SocioProService socioProService;
     private EmployeeMapper mapper;
     private final AlphanumericValidator validator;
@@ -54,6 +59,33 @@ public class EmployeeController {
     @ModelAttribute("suggestedPostProOptions")
     public List<Post> getSuggestedPostProOptions() {
         return postsService.findAll();
+    }
+    @GetMapping("/filter")
+    public String filterAndSortEmployees(
+            @RequestParam(name = "lastName", required = false) String lastName,
+            @RequestParam(name = "firstName", required = false) String firstName,
+            @RequestParam(name = "sex", required = false) Sex sex,
+            @RequestParam(name = "postName", required = false) String postName,
+            @RequestParam(name = "minHireDate", required = false) String minHireDate,
+            @RequestParam(name = "maxHireDate", required = false) String maxHireDate,
+            @RequestParam(name = "minLeaveDate", required = false) String minLeaveDate,
+            @RequestParam(name = "maxLeaveDate", required = false) String maxLeaveDate,
+            @RequestParam(name = "sortBy", required = false) String sortBy,
+            @RequestParam(name = "sortOrder", required = false) String sortOrder,
+            Model model
+    ) {
+        Specification<Employee> spec = employeeService.buildEmployeeSpecification(
+                lastName, firstName, sex, postName, minHireDate, maxHireDate, minLeaveDate, maxLeaveDate);
+
+        Sort sort = Sort.unsorted();
+        if (sortBy != null && !sortBy.isEmpty()) {
+            sort = Sort.by(sortOrder.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC, sortBy);
+        }
+
+        List<Employee> filteredAndSortedEmployees = repository.findAll(spec, sort);
+        model.addAttribute("employees", filteredAndSortedEmployees);
+
+        return "employee/list_employee";
     }
 
     @GetMapping("/add")

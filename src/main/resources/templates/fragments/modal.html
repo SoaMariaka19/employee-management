@@ -1,0 +1,37 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-body">
+          <form th:action="@{/employees/filter}" method="get">
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last Name:</label>
+              <input type="text" class="form-control" id="lastName" name="lastName">
+            </div>
+            <div class="mb-3">
+              <label for="firstName" class="form-label">First Name:</label>
+              <input type="text" class="form-control" id="firstName" name="firstName">
+            </div>
+
+            <div class="mb-3">
+              <label for="sortBy" class="form-label">Sort By:</label>
+              <select class="form-select" id="sortBy" name="sortBy">
+                <option value="lastName">Last Name</option>
+                <option value="firstName">First Name</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="sortOrder" class="form-label">Sort Order:</label>
+              <select class="form-select" id="sortOrder" name="sortOrder">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="hideModal()">Close</button>
+            <button type="submit" class="btn btn-primary">Apply Filters</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
