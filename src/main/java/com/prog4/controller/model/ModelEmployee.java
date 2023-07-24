@@ -4,8 +4,6 @@ import com.prog4.entity.*;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -36,6 +34,6 @@ public class ModelEmployee {
     private String cinNumber;
     private String cinDate;
     private String cinPlace;
-    private List<String> postsList;
+    private String post;
     private String nbrCnaps;
 }

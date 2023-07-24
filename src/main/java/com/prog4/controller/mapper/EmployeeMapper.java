@@ -7,9 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -34,11 +32,7 @@ public class EmployeeMapper {
         } else {
             employee.setPhoto(new CustomMultipartFile("aucune image"));
         }
-        List<Post> postList = new ArrayList<>();
-        for (String post : employee.getPostsList()){
-            Post tmp = postsService.getByName(post);
-            postList.add(tmp);
-        }
+        Post post = postsService.getByName(employee.getPost());
         Employee employee1 = Employee.builder()
                 .cin(nationalCard)
                 .id(employee.getId())
@@ -53,7 +47,7 @@ public class EmployeeMapper {
                 .phoneNbr(employee.getPhoneNbr())
                 .outDate(employee.getOutDate())
                 .sex(employee.getSex())
-                .postsList(postList)
+                .post(post)
                 .registrationNbr(employee.getRegistrationNbr())
                 .nbrCnaps(cnaps)
                 .nbrChildren(employee.getNbrChildren())
@@ -66,7 +60,7 @@ public class EmployeeMapper {
         Employee employee1 = service.findByRegisterNumber(employee.getRegistrationNbr());
         employee1.setSex(employee.getSex());
         employee1.setPhoneNbr(employee.getPhoneNbr());
-        employee1.setPostsList(employee.getPostsList());
+        employee1.setPost(employee.getPost());
         employee1.setOutDate(employee.getOutDate());
         employee1.setNbrChildren(employee.getNbrChildren());
         employee1.setFirstName(employee.getFirstName());

@@ -42,8 +42,8 @@ public class Employee {
     @OneToOne(cascade = CascadeType.ALL)
     private NationalCard cin;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Post> postsList;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Post post;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Cnaps nbrCnaps;
