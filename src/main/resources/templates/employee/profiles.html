@@ -24,14 +24,10 @@
     <p><span class="attribute">Sexe  : </span><span th:text="${employee.sex}"></span></p>
     <p><span class="attribute">Registration Number : </span><span th:text="${employee.registrationNbr}"></span></p>
     <p><span class="attribute">Numéro de Tel: </span><span th:text="${employee.phoneNbr}"></span></p>
-    <p><span class="attribute">Adresse  : </span><span th:text="${employee.address}"></span></p>
-    <p><span class="attribute">Postes :</span></p>
-    <div th:each="post : ${suggestedPostProOptions}">
-      <p><b>* </b><span th:text="*{post.nameOfPost}">
-      </span>
-    </div>
+    <p><span class="attribute">Enfants  : </span><span th:text="${employee.nbrChildren}"></span></p>
   </div>
   <div class="second-container">
+    <p><span class="attribute">Poste  : </span><span th:text="${employee.post}"></span></p>
     <p><span class="attribute">Email professionnel  : </span><span th:text="${employee.emailPro}"></span></p>
     <p><span class="attribute">Email personnel  : </span><span th:text="${employee.emailPerso}"></span></p>
     <p><span class="attribute">Date d'arrivée : </span><span th:text="${employee.beggingDate}"></span></p>
