@@ -41,7 +41,8 @@ public class EmployeeService {
             String minHireDate,
             String maxHireDate,
             String minLeaveDate,
-            String maxLeaveDate
+            String maxLeaveDate,
+            String phoneNumber
     ) {
         Specification<Employee> spec = Specification.where(null);
 
@@ -59,7 +60,10 @@ public class EmployeeService {
             spec = spec.and((root, query, builder) ->
                     builder.equal(root.get("sex"), sex));
         }
-
+        if (phoneNumber != null && !phoneNumber.isEmpty()) {
+            spec = spec.and((root, query, builder) ->
+                    builder.like(root.get("phoneNbr"), phoneNumber + "%"));
+        }
         if (postName != null && !postName.isEmpty()) {
             spec = spec.and((root, query, builder) -> {
                 Join<Employee, Post> postJoin = root.join("postsList");

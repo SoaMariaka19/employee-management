@@ -69,10 +69,11 @@ public class EmployeeController {
             @RequestParam(name = "maxLeaveDate", required = false) String maxLeaveDate,
             @RequestParam(name = "sortBy", required = false) String sortBy,
             @RequestParam(name = "sortOrder", required = false) String sortOrder,
+            @RequestParam(name = "phoneNumber", required = false) String phone,
             Model model
     ) {
         Specification<Employee> spec = employeeService.buildEmployeeSpecification(
-                lastName, firstName, sex, postName, minHireDate, maxHireDate, minLeaveDate, maxLeaveDate);
+                lastName, firstName, sex, postName, minHireDate, maxHireDate, minLeaveDate, maxLeaveDate , phone);
 
         Sort sort = Sort.unsorted();
         if (sortBy != null && !sortBy.isEmpty()) {

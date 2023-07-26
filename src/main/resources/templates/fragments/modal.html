@@ -1,4 +1,4 @@
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+<div class="modalA" id="myModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -31,6 +31,9 @@
 
             <label for="maxLeaveDate">Max Leave Date:</label>
             <input type="date" id="maxLeaveDate" name="maxLeaveDate" th:value="${param.maxLeaveDate}"/>
+
+            <label for="phoneNumber">Plage de N°:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" th:value="${param.phoneNumber}"/>
 
             <label for="sort">Sort:</label>
             <select id="sort" name="sort">
