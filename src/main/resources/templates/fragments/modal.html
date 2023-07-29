@@ -33,7 +33,11 @@
             <input type="date" id="maxLeaveDate" name="maxLeaveDate" th:value="${param.maxLeaveDate}"/>
 
             <label for="phoneNumber">Plage de N°:</label>
-            <input type="text" id="phoneNumber" name="phoneNumber" th:value="${param.phoneNumber}"/>
+            <select id="phoneNumber" name="phoneNumber">
+              <option value="">-- All --</option>
+              <option value="+261" th:selected="${param.phoneNumber == '+261'}">Madagascar (+261)</option>
+              <option value="+33" th:selected="${param.phoneNumber == '+33'}">France (+33)</option>
+            </select>
 
             <label for="sort">Sort:</label>
             <select id="sort" name="sort">

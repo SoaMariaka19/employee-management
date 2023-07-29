@@ -14,7 +14,7 @@
 <div th:replace="/index" ></div>
 <div th:replace="fragments/modal"></div>
 <h1>Employee List</h1>
-<div class="menu">
+<div class="menu" sec:authorize="isAuthorized()">
     <span class="button-modal" onclick="showModal()">Filter</span>
     <a href="/employees/export-csv" class="export-link">Export as CSV</a>
 </div>
@@ -46,8 +46,6 @@
         myModal.setAttribute('aria-modal', 'true');
         myModal.removeAttribute('aria-hidden');
 
-        var modalBackdrop = document.createElement('div');
-        modalBackdrop.classList.add('modal-backdrop', 'fade', 'show');
         document.body.appendChild(modalBackdrop);
     }
 
