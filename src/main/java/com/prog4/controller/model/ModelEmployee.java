@@ -4,6 +4,8 @@ import com.prog4.entity.*;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -27,13 +29,17 @@ public class ModelEmployee {
     }
     private String emailPerso;
     private String emailPro;
-    private String beggingDate;
-    private String outDate;
+    private LocalDate beggingDate;
+    private LocalDate outDate;
     private int nbrChildren;
     private Long socioPro;
+    private String socioProCat;
     private String cinNumber;
     private String cinDate;
     private String cinPlace;
     private String post;
     private String nbrCnaps;
+    // to update form
+    private String formattedBeggingDate;
+    private String formattedOutDate;
 }

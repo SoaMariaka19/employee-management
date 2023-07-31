@@ -6,7 +6,6 @@ import com.prog4.entity.Sex;
 import com.prog4.repository.EmployeeRepository;
 import jakarta.persistence.criteria.Join;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 

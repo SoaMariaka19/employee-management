@@ -2,7 +2,9 @@ package com.prog4.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -28,8 +30,10 @@ public class Employee {
     private String image = "aucune image";
     private String emailPerso;
     private String emailPro;
-    private String beggingDate;
-    private String outDate;
+    @DateTimeFormat(fallbackPatterns = "yyyy-MM-dd")
+    private LocalDate beggingDate;
+    @DateTimeFormat(fallbackPatterns = "yyyy-MM-dd")
+    private LocalDate outDate;
     private int nbrChildren = 0;
 
     /*

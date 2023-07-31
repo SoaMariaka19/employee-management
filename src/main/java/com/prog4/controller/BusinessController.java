@@ -12,11 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 
 @AllArgsConstructor
+@CrossOrigin("*")
 @Controller
 public class BusinessController {
     private final BusinessMapper mapper;
+    private final BusinessRepository repository;
     @GetMapping("/business/create")
     public String showBusinessForm(Model model) {
         model.addAttribute("business", new ModelBusiness());
@@ -29,13 +32,16 @@ public class BusinessController {
         business.setLogo(logoFile);
         mapper.toEntity(business);
         redirectAttributes.addFlashAttribute("successMessage", "Business created successfully!");
-        return "redirect:/business/create";
+        return "redirect:/";
     }
     @GetMapping("/")
-    public String getBusiness(@ModelAttribute("business") ModelBusiness modelBusiness,
-                              Model model
-    ) throws IOException {
-        model.addAttribute("business", modelBusiness);
+    public String getBusiness(Model model) throws IOException {
+        List<Business> business = repository.findAll();
+        Business business1 = new Business();
+        if (!business.isEmpty()){
+            model.addAttribute("business", business.get(0));
+        }
+        model.addAttribute("business",business1);
         return "/index";
     }
 }

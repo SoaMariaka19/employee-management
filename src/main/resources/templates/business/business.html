@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="container mt-5">
+  <span class="edit-btn"><a th:href="@{'/employees'}">Retour</a> </span>
   <h2>Create New Business</h2>
   <form th:action="@{/business/create}" th:object="${business}" method="post" enctype="multipart/form-data">
     <div class="form-group">

@@ -48,16 +48,16 @@
     <input type="text" id="address" th:field="*{address}" required>
     <br/>
 
-    <!--<label for="photo">Identity Photo:</label>
-    <input type="file" id="photo" name="photo" th:field="*{image}">
-    <br/>-->
+    <label for="photo">Identity Photo:</label>
+    <input type="file" id="photo" name="photo" th:field="*{photo}">
+    <br/>
 
     <label for="beggingDate">Hiring Date:</label>
-    <input type="date" id="beggingDate" th:field="*{beggingDate}" required pattern="yyyy-MM-dd"/>
+    <input type="date" id="beggingDate" th:value="${newEmployee.formattedBeggingDate}" required pattern="yyyy-MM-dd"/>
     <br/>
 
     <label for="outDate">Departure Date:</label>
-    <input type="date" id="outDate" th:field="*{outDate}" pattern="yyyy-MM-dd"/>
+    <input type="date" id="outDate" th:value="${newEmployee.formattedOutDate}" pattern="yyyy-MM-dd"/>
     <br/>
 
     <label for="emailPerso">Personal Email:</label>
@@ -73,26 +73,20 @@
     <br/>
 
     <label for="socioPro">Socio-Professional Category:</label>
-    <select id="socioPro" th:field="*{cateSocioPro.categories}" required>
-        <option value="">-- Select Socio-Professional Category --</option>
-        <option th:each="socioProOption : ${suggestedSocioProOptions}"
-                th:value="${socioProOption.categories}"
-                th:text="${socioProOption.categories}">
-        </option>
-    </select>
+        <input type="text" id="socioPro" th:field="*{socioProCat}" required>
     <br/>
 
 
     <label for="cin">National Card:</label>
-    <input type="text" id="cin" th:field="*{cin.number}" required>
+    <input type="text" id="cin" th:field="*{cinNumber}" required>
     <br/>
 
     <label for="cinPlace">National Card Place:</label>
-    <input type="text" id="cinPlace" th:field="*{cin.place}" required>
+    <input type="text" id="cinPlace" th:field="*{cinPlace}" required>
     <br/>
 
     <label for="cinDate">National Card Date:</label>
-    <input type="date" id="cinDate" th:field="*{cin.date}" pattern="yyyy-MM-dd"/>
+    <input type="date" id="cinDate" th:field="*{cinDate}" pattern="yyyy-MM-dd"/>
     <br/>
 
     <label>Posts:</label>
@@ -104,7 +98,7 @@
 
 
     <label for="nbrCnaps">CNAPS Number:</label>
-    <input type="text" id="nbrCnaps" th:field="*{nbrCnaps.nbrCNAPS}" required>
+    <input type="text" id="nbrCnaps" th:field="*{nbrCnaps}" required>
     <br/>
     <p th:if="${cnapsError}" class="cinError" th:text="${cnapsError}"></p>
 

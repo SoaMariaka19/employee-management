@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class ModelUSer {
     private String username;
     private String password;
+    private String role = "ADMIN";
     private boolean enabled = true;
 }

@@ -13,9 +13,9 @@ public class UserMapper {
 
     public Member toEntity(ModelUSer modelUSer){
         return Member.builder()
-                .enabled(modelUSer.isEnabled())
                 .password(passwordEncoder.encode(modelUSer.getPassword()))
                 .username(modelUSer.getUsername())
+                .role(modelUSer.getRole())
                 .build();
     }
 }

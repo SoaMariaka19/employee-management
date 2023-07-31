@@ -15,31 +15,13 @@ import java.util.Collections;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Member implements UserDetails {
+public class Member{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String username;
+    @Column(unique = true)
     private String password;
-    private boolean enabled;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-}
+    private String role = "ADMIN";
+   }

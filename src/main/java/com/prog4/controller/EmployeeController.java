@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @AllArgsConstructor
@@ -124,15 +125,22 @@ public class EmployeeController {
     @GetMapping("/{id}/update")
     public String showUpdateEmployeeForm(@PathVariable("id") Long employeeId, Model model) {
         Employee employee = employeeService.findById(employeeId);
-        model.addAttribute("newEmployee", employee);
+        ModelEmployee newEmployee = mapper.convertToEmployeeForm(employee);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        newEmployee.setFormattedBeggingDate(employee.getBeggingDate().format(formatter));
+
+        if(employee.getOutDate() != null){
+            newEmployee.setFormattedOutDate(employee.getOutDate().format(formatter));
+        }
+        newEmployee.setFormattedOutDate("");
+
+        model.addAttribute("newEmployee", newEmployee);
         return "employee/update-employee";
     }
 
     @PostMapping("/update")
-    public String updateEmployee(@ModelAttribute("newEmployee") Employee modelEmployee) throws IOException {
-        SocioPro socioPro = socioProService.getByCategory(modelEmployee.getCateSocioPro().getCategories());
-        socioPro.setCategories(modelEmployee.getCateSocioPro().getCategories());
-        Employee employee = mapper.toUpdate(socioPro , modelEmployee);
+    public String updateEmployee(@ModelAttribute("newEmployee") ModelEmployee modelEmployee) throws IOException {
+        Employee employee = mapper.toModel(modelEmployee);
         return "redirect:/employees/" + employee.getId();
     }
 
