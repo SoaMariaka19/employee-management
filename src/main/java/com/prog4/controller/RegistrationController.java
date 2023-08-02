@@ -48,7 +48,8 @@ public class RegistrationController {
     @PostMapping(value = "/authenticate" , consumes = MediaType.APPLICATION_JSON_VALUE)
     public String auth(
             HttpServletRequest request,
-            RedirectAttributes redirectAttributes
+            RedirectAttributes redirectAttributes,
+            @ModelAttribute("loginError") Model error
     ){
         String username = request.getParameter("password");
         String password = request.getParameter("username");
@@ -60,10 +61,10 @@ public class RegistrationController {
                 securityContext.setAuthentication(authentication);
                 HttpSession session = request.getSession(true);
                 session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,securityContext);
-                return "redirect:/employees";
             }
-            return "redirect:/login";
+            error.addAttribute("loginErrorCredential","Verify credentials");
         }
+        error.addAttribute("loginErrorCredential","Verify credentials");
         return "redirect:/login";
     }
     @GetMapping("/registry")
