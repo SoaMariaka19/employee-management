@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Employee List</title>
@@ -14,24 +15,34 @@
 <div th:replace="/index" ></div>
 <div th:replace="fragments/modal"></div>
 <h1>Employee List</h1>
-<div class="menu" sec:authorize="isAuthorized()">
+<div class="menu" sec:authorize="isFullyAuthenticated()">
     <span class="button-modal" onclick="showModal()">Filter</span>
     <a href="/employees/export-csv" class="export-link">Export as CSV</a>
 </div>
-<table>
+<table class="table table-hover table-responsive-md">
     <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Date of Birth</th>
-        <th>Registration Number</th>
-        <th>Details</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Date of Birth</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Registration Number</th>
+        <th scope="col">Post</th>
+        <th scope="col">Details</th>
     </tr>
     <tr th:each="employee : ${employees}">
-        <td th:text="${employee.firstName}"></td>
-        <td th:text="${employee.lastName}"></td>
-        <td th:text="${employee.dateOfBirth}"></td>
-        <td th:text="${employee.registrationNbr}" ></td>
+        <td scope="row" th:text="${employee.firstName}"></td>
+        <td scope="row" th:text="${employee.lastName}"></td>
+        <td scope="row" th:text="${employee.dateOfBirth}"></td>
         <td>
+            <ul th:each="phone : ${employee.phoneNumbers}" style="color: #615298">
+                <li>
+                    <span th:text="|${phone.number}|"></span>
+                </li>
+            </ul>
+        </td>
+        <td scope="row" th:text="${employee.registrationNbr}" ></td>
+        <td scope="row" th:text="${employee.post}" ></td>
+        <td scope="row">
             <a th:href="@{'/employees/' + ${employee.id}}">Infos</a>
         </td>
     </tr>

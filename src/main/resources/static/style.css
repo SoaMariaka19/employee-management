@@ -1,5 +1,4 @@
 body {
-    background-image: url("background.jpg");
     font-family: 'Poppins', sans-serif;
 }
 h1 {
@@ -209,7 +208,7 @@ select:focus {
     margin-top: 10px;
     padding: 10px 15px;
     font-family: bold, sans-serif;
-    background-color: #00ff3c;
+    background-color: rgba(137, 213, 151, 0.87);
     color: #ffffff;
     text-decoration: none;
     flex-basis: 50%;
@@ -217,7 +216,7 @@ select:focus {
 }
 .export-link:hover {
     background-color: #262424;
-    color: #ffffff;
+    color: #000000;
 }
 
 .menu{
@@ -230,7 +229,7 @@ select:focus {
 
 .button-modal{
     color: #ffffff;
-    background-color: yellow;
+    background-color: rgba(35, 35, 31, 0.38);
     font-family: bold, sans-serif;
     display: inline-block;
     margin-top: 10px;
@@ -243,7 +242,7 @@ select:focus {
 
 .button-modal:hover{
     color: #ffffff;
-    background-color: #262424;
+    background-color: rgba(201, 89, 89, 0.89);
 }
 
 .business_logo{

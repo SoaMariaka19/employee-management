@@ -2,15 +2,16 @@ package com.prog4.controller;
 
 import com.prog4.controller.mapper.EmployeeMapper;
 import com.prog4.controller.model.ModelEmployee;
-import com.prog4.entity.Post;
-import com.prog4.entity.Sex;
-import com.prog4.entity.SocioPro;
+import com.prog4.entity.*;
+import com.prog4.repository.BusinessRepository;
 import com.prog4.repository.EmployeeRepository;
-import com.prog4.service.PostsService;
+import com.prog4.repository.PhoneNumberRepository;
+import com.prog4.service.CnapsService;
+import com.prog4.service.NationalCardService;
 import com.prog4.service.SocioProService;
 import com.prog4.service.validator.AlphanumericValidator;
-import com.prog4.entity.Employee;
 import com.prog4.service.EmployeeService;
+import com.prog4.service.validator.PhoneValidator;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -31,14 +33,22 @@ import java.util.List;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
-    private final PostsService postsService;
     private final EmployeeRepository repository;
-    private final SocioProService socioProService;
+    private final PhoneNumberRepository phoneNumberRepository;
+    private final BusinessRepository businessRepository;
+    private SocioProService socioProService;
     private EmployeeMapper mapper;
     private final AlphanumericValidator validator;
+    private final PhoneValidator phoneValidator;
     @GetMapping
     public String getAllEmployees(Model model){
         List<Employee> employees = employeeService.findAll();
+        List<Business> business = businessRepository.findAll();
+        Business business1 = new Business();
+        if (business.isEmpty()){
+            model.addAttribute("business", business1);
+        }
+        model.addAttribute("business",business.get(0));
         model.addAttribute("employees", employees);
 
         return "employee/list_employee";
@@ -54,10 +64,6 @@ public class EmployeeController {
         return socioProService.findAll();
     }
 
-    @ModelAttribute("suggestedPostProOptions")
-    public List<Post> getSuggestedPostProOptions() {
-        return postsService.findAll();
-    }
     @GetMapping("/filter")
     public String filterAndSortEmployees(
             @RequestParam(name = "lastName", required = false) String lastName,
@@ -70,9 +76,15 @@ public class EmployeeController {
             @RequestParam(name = "maxLeaveDate", required = false) String maxLeaveDate,
             @RequestParam(name = "sortBy", required = false) String sortBy,
             @RequestParam(name = "sortOrder", required = false) String sortOrder,
-            @RequestParam(name = "phoneNumber", required = false) String phone,
+            @RequestParam(name = "phoneNumber", required = false) List<String> phone,
             Model model
     ) {
+        List<Business> business = businessRepository.findAll();
+        Business business1 = new Business();
+        if (business.isEmpty()){
+            model.addAttribute("business", business1);
+        }
+        model.addAttribute("business",business.get(0));
         Specification<Employee> spec = employeeService.buildEmployeeSpecification(
                 lastName, firstName, sex, postName, minHireDate, maxHireDate, minLeaveDate, maxLeaveDate , phone);
 
@@ -89,6 +101,12 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public String showAddEmployeeForm(Model model){
+        List<Business> business = businessRepository.findAll();
+        Business business1 = new Business();
+        if (business.isEmpty()){
+            model.addAttribute("business", business1);
+        }
+        model.addAttribute("business",business.get(0));
         model.addAttribute("employee", new ModelEmployee());
         return "employee/add-employee";
     }
@@ -100,7 +118,14 @@ public class EmployeeController {
     ) throws IOException {
        try{
            if(validator.checkIfAlphanumeric(modelEmployee.getCinNumber())){
+               for(String number : modelEmployee.getPhoneNbr()){
+                   if(!phoneValidator.phoneCheck(number)){
+                       modelError.addAttribute("phoneError","phone number size must be equal 10");
+                       return "employee/add-employee";
+                   }
+               }
                Employee employee = mapper.toEntity(modelEmployee);
+               employeeService.save(employee);
                return "redirect:/employees/" + employee.getId();
            }
             modelError.addAttribute("cnapsError","cnaps number must be alphanumeric only [a-zA-Z0-9]");
@@ -118,50 +143,77 @@ public class EmployeeController {
             @PathVariable("id") Long id, Model model
     ){
         Employee employee = employeeService.findById(id);
-        model.addAttribute("employee", employee);
+        List<Business> business = businessRepository.findAll();
+        Business business1 = new Business();
+        if (business.isEmpty()){
+            model.addAttribute("business", business1);
+        }
+        ModelEmployee modelEmployee = mapper.convertToEmployeeForm(employee);
+        model.addAttribute("employee", modelEmployee);
+        model.addAttribute("business",business.get(0));
         return "employee/profiles";
     }
 
     @GetMapping("/{id}/update")
     public String showUpdateEmployeeForm(@PathVariable("id") Long employeeId, Model model) {
-        Employee employee = employeeService.findById(employeeId);
-        ModelEmployee newEmployee = mapper.convertToEmployeeForm(employee);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        newEmployee.setFormattedBeggingDate(employee.getBeggingDate().format(formatter));
-
-        if(employee.getOutDate() != null){
-            newEmployee.setFormattedOutDate(employee.getOutDate().format(formatter));
+        List<Business> business = businessRepository.findAll();
+        Business business1 = new Business();
+        if (business.isEmpty()){
+            model.addAttribute("business", business1);
         }
-        newEmployee.setFormattedOutDate("");
+        model.addAttribute("business",business.get(0));
+        Employee employee = employeeService.findById(employeeId);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        model.addAttribute("newEmployee", newEmployee);
+        if(employee.getBeggingDate() != null){
+            employee.setFormattedBeggingDate(employee.getBeggingDate().format(formatter));
+        }
+        employee.setFormattedBeggingDate("");
+        if(employee.getOutDate() != null){
+            employee.setFormattedOutDate(employee.getOutDate().format(formatter));
+        }
+
+        employee.setFormattedOutDate("");
+        model.addAttribute("newEmployee", employee);
         return "employee/update-employee";
     }
 
     @PostMapping("/update")
-    public String updateEmployee(@ModelAttribute("newEmployee") ModelEmployee modelEmployee) throws IOException {
-        Employee employee = mapper.toModel(modelEmployee);
-        return "redirect:/employees/" + employee.getId();
+    public String updateEmployee(@ModelAttribute("newEmployee") Employee modelEmployee , Model model) throws IOException {
+        Employee employee = employeeService.findById(modelEmployee.getId());
+        modelEmployee.setRegistrationNbr(employee.getRegistrationNbr());
+        boolean saving = false;
+        modelEmployee.setImage("");
+        for(PhoneNumber number : employee.getPhoneNumbers()){
+            if(!phoneValidator.phoneCheck(number.getNumber())){
+                model.addAttribute("phoneError","phone number size must be equal 10");
+                saving = false;
+            }
+            saving = true;
+        }
+        if(saving){
+            phoneNumberRepository.saveAll(modelEmployee.getPhoneNumbers());
+        }
+        Employee emp = employeeService.save(modelEmployee);
+        return "redirect:/employees/" + emp.getId();
     }
 
     @GetMapping("/export-csv")
-    public void exportCsv(HttpServletResponse response) throws IOException {
-        List<Employee> employees = employeeService.findAll();
-
+    public void exportCsv(HttpServletResponse response , @ModelAttribute("employees") List<Employee> employeeList) throws IOException {
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; filename=\"employees.csv\"");
 
         try (PrintWriter writer = response.getWriter()) {
             writer.println("First Name,Last Name,Date of Birth,Registration Number");
-            for (Employee employee : employees) {
+            for (Employee employee : employeeList) {
                 writer.println(
                         employee.getFirstName() + "," +
                                 employee.getLastName() + "," +
                                 employee.getDateOfBirth() + "," +
                                 employee.getSex() + "," +
                                 employee.getRegistrationNbr() + "," +
-                                employee.getPhoneNbr() + "," +
                                 employee.getAddress() + "," +
+                                employee.getPost() + "," +
                                 employee.getEmailPerso() + "," +
                                 employee.getEmailPro() + "," +
                                 employee.getBeggingDate() + "," +

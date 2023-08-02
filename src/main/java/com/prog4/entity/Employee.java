@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor
 @Builder
@@ -23,8 +24,7 @@ public class Employee {
     private String dateOfBirth;
     private Sex sex;
     @Column(unique = true)
-    private Long registrationNbr;
-    private String phoneNbr;
+    private String registrationNbr;
     private String address;
     @Column(columnDefinition = "text")
     private String image = "aucune image";
@@ -35,7 +35,8 @@ public class Employee {
     @DateTimeFormat(fallbackPatterns = "yyyy-MM-dd")
     private LocalDate outDate;
     private int nbrChildren = 0;
-
+    private String post;
+    private String pays;
     /*
     * All foreign keys
     *  */
@@ -43,12 +44,24 @@ public class Employee {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE})
     private SocioPro cateSocioPro;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE})
     private NationalCard cin;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Post post;
+    @OneToMany
+    private List<PhoneNumber> phoneNumbers;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE})
     private Cnaps nbrCnaps;
+
+    @PrePersist
+    public void generatedRegistrationNbr(){
+        this.registrationNbr = "EMP-" + UUID.randomUUID();
+    }
+
+    // to update form
+    @Transient
+    private String formattedBeggingDate;
+    @Transient
+    private String formattedOutDate;
 }
+

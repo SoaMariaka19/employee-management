@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -27,26 +28,27 @@
     /* Center the logo and business name */
     .logo {
         display: flex;
-        align-items: center;
+        justify-content: left;
         padding: 0 10px;
     }
 
     .logo img {
-        width: 40px; /* Set your desired logo width */
-        height: auto;
+        width: 40px;
+        height: 40px;
         margin-right: 10px;
+        border-radius: 50%;
     }
 </style>
 <body>
-<header th:fragment="header">
+<header th:fragment="header" sec:authorize="isAuthenticated()">
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-       <!--status <div class="logo">
-            <img class="employee_image" th:src="'data:image/jpeg;base64,' + ${business.logo}" alt="Logo">
-        </div> -->
+       <div class="logo">
+       <!--  <img class="employee_image" th:href="@{/business/create}" th:src="'data:image/jpeg;base64,' + ${business.logo}" alt="Logo"> -->
+        </div>
         <div class="collapse navbar-collapse" id="topNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/business/create}">Entreprise</a>
+                 <a class="nav-link" th:href="@{/business/create}" >Entreprise</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/employees}">List des employés</a>

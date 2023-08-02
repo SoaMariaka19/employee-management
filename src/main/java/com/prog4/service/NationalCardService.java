@@ -29,8 +29,9 @@ public class NationalCardService {
         return nationalCard1;
     }
 
-    public void save(NationalCard card){
-        repository.save(card);
+    public NationalCard save(NationalCard card){
+        NationalCard nationalCard = repository.save(card);
+        return this.findById(nationalCard.getId());
     }
     public NationalCard getByNumber(String number){
         Optional<NationalCard> nationalCard = repository.findNationalCardByNumberEqualsIgnoreCase(number);

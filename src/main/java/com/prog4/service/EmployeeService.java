@@ -1,10 +1,11 @@
 package com.prog4.service;
 
 import com.prog4.entity.Employee;
-import com.prog4.entity.Post;
+import com.prog4.entity.PhoneNumber;
 import com.prog4.entity.Sex;
 import com.prog4.repository.EmployeeRepository;
 import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.Predicate;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @AllArgsConstructor
 @Service
@@ -41,7 +43,7 @@ public class EmployeeService {
             String maxHireDate,
             String minLeaveDate,
             String maxLeaveDate,
-            String phoneNumber
+            List<String> phoneNumber
     ) {
         Specification<Employee> spec = Specification.where(null);
 
@@ -60,14 +62,18 @@ public class EmployeeService {
                     builder.equal(root.get("sex"), sex));
         }
         if (phoneNumber != null && !phoneNumber.isEmpty()) {
-            spec = spec.and((root, query, builder) ->
-                    builder.like(root.get("phoneNbr"), phoneNumber + "%"));
+            AtomicReference<Predicate> predicate = new AtomicReference<>();
+            spec = spec.and((root, query, builder) -> {
+                Join<Employee, PhoneNumber> postJoin = root.join("phoneNumbers");
+                for(String number : phoneNumber){
+                    predicate.set(builder.like(postJoin.get("number"),  number + "%"));
+                }
+                return predicate.get();
+            });
         }
         if (postName != null && !postName.isEmpty()) {
-            spec = spec.and((root, query, builder) -> {
-                Join<Employee, Post> postJoin = root.join("postsList");
-                return builder.like(postJoin.get("nameOfPost"), "%" + postName + "%");
-            });
+            spec = spec.and((root, query, builder) ->
+                    builder.like(root.get("post"), postName + "%"));
         }
 
         if (minHireDate != null && !minHireDate.isEmpty()) {
@@ -95,8 +101,5 @@ public class EmployeeService {
         }
 
         return spec;
-    }
-    public Employee findByRegisterNumber(Long number){
-        return repository.findByRegistrationNbr(number);
     }
 }

@@ -3,6 +3,8 @@ package com.prog4.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @NoArgsConstructor
 @Entity
 @Getter
@@ -22,11 +24,12 @@ public class Business {
     private String address;
     @Column(unique = true)
     private String email;
-    @Column(unique = true)
-    private String phone;
     @Column(columnDefinition = "text")
     private String logo;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Fiscal idFiscal;
+
+    @OneToMany
+    private List<PhoneNumber> phoneNumbers;
 }

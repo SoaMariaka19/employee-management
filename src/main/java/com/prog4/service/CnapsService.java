@@ -25,13 +25,11 @@ public class CnapsService {
         return cnaps1;
    }
     public Cnaps getByNumber(String number){
-        Optional<Cnaps> cnaps = repository.findByNbrCNAPS(number);
-        Cnaps cnaps1 = new Cnaps();
-        cnaps.ifPresent(value -> cnaps1.setNbrCNAPS(value.getNbrCNAPS()));
-        return cnaps1;
+        return repository.findByNbrCNAPS(number);
     }
 
-    public void save(Cnaps cnaps){
-        repository.save(cnaps);
+    public Cnaps save(Cnaps cnaps){
+        Cnaps cnaps1  = repository.save(cnaps);
+        return this.getById(cnaps1.getId());
     }
 }

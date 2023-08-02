@@ -3,16 +3,17 @@ package com.prog4.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Builder
 @AllArgsConstructor
+@Builder
 @NoArgsConstructor
 @Entity
 @Getter
 @Setter
 @EqualsAndHashCode
-public class SocioPro {
+public class PhoneNumber {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
-    private String categories;
+    @Column(unique = true)
+    private String number;
 }

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Add Employee</title>
     <link rel="stylesheet" th:href="@{/style.css}" >
+    <link rel="stylesheet" th:href="@{/profileCss.css}" >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
@@ -35,14 +36,25 @@
         </select>
         <br/>
 
-        <label for="registrationNbr">Registration Number:</label>
-        <input type="text" id="registrationNbr" th:field="*{registrationNbr}" required>
-        <br/>
-
           <p style="color: red" th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></p>
+
+        <label for="phoneNumber">Plage de N°:</label>
+        <select id="phoneNumber" th:field="*{pays}" name="phoneNumber">
+            <option value="">-- All --</option>
+            <option value="+261">Madagascar</option>
+            <option value="+1">US</option>
+            <option value="+33">France</option>
+        </select>
 
         <label for="phoneNbr">Phone Number:</label>
         <input type="text" id="phoneNbr" th:field="*{phoneNbr}" required>
+        <button type="button" onclick="addPhoneNumber()">Add Phone number</button>
+        <p style="color: red" th:if="${phoneError}" class="cinError" th:text="${phoneError}"></p>
+        <div id="phoneSelectsContainer">
+            <p style="color: red" th:if="${phoneError}" class="cinError" th:text="${phoneError}"></p>
+        </div>
+        <div id="phoneInputsContainer">
+        </div>
         <br/>
 
         <label for="address">Address:</label>
@@ -74,11 +86,11 @@
         <br/>
 
         <label for="socioPro">Socio-Professional Category:</label>
-        <select id="socioPro" th:field="*{socioPro}" required>
+        <select id="socioPro" th:field="*{socioProCat}" required>
             <option value="">-- Select Socio-Professional Category --</option>
             <option th:each="socioProOption : ${suggestedSocioProOptions}"
-                    th:value="${socioProOption.id}"
-                    th:text="${socioProOption.categories}">
+                    th:value="${socioProOption?.categories}"
+                    th:text="${socioProOption?.categories}">
             </option>
         </select>
         <br/>
@@ -98,11 +110,8 @@
         <input type="date" id="cinDate" th:field="*{cinDate}" pattern="yyyy-MM-dd"/>
         <br/>
 
-        <label>Posts:</label>
-        <div th:each="post : ${suggestedPostProOptions}">
-            <label for="${post.id}"></label><input type="checkbox" th:field="*{post}" th:value="*{id}" id="${post.id}">
-            <label th:for="*{id}" th:text="${post.nameOfPost}"></label>
-        </div>
+        <label for="post">Posts:</label>
+        <input type="text" id="post" th:field="*{post}" required>
         <br/>
 
 
@@ -115,27 +124,34 @@
 
 </body>
 <script>
-    const postsList = document.getElementById("postsList");
-    postsList.addEventListener("change", function() {
-        if (this.selectedOptions.length > 1) {
-            this.setAttribute("multiple", "multiple");
-        } else {
-            this.removeAttribute("multiple");
-        }
-    });
-  /*function showPage(pageNumber) {
-    const pages = document.querySelectorAll('.form-page');
-    for (let i = 0; i < pages.length; i++) {
-      pages[i].style.display = i === pageNumber ? 'block' : 'none';
+    function addPhoneNumber() {
+        addPhoneNumberSelect();
+        var phoneInputsContainer = document.getElementById("phoneInputsContainer");
+        var inputNumber = document.createElement("input");
+        inputNumber.type = "text";
+        inputNumber.name = "phoneNbr";
+        inputNumber.required = true;
+        phoneInputsContainer.appendChild(inputNumber);
     }
-  }
+    function addPhoneNumberSelect() {
+        var phoneSelectsContainer = document.getElementById("phoneSelectsContainer");
+        var selectPhoneNumber = document.createElement("select");
+        selectPhoneNumber.id = "phoneNumber";
+        selectPhoneNumber.name = "phoneNumber";
+        var optionAll = document.createElement("option");
+        optionAll.value = "";
+        optionAll.text = "-- All --";
+        var optionMadagascar = document.createElement("option");
+        optionMadagascar.value = "+261";
+        optionMadagascar.text = "Madagascar";
+        var optionFrance = document.createElement("option");
+        optionFrance.value = "+33";
+        optionFrance.text = "France";
+        selectPhoneNumber.appendChild(optionAll);
+        selectPhoneNumber.appendChild(optionMadagascar);
+        selectPhoneNumber.appendChild(optionFrance);
+        phoneSelectsContainer.appendChild(selectPhoneNumber);
+    }
 
-  function nextPage() {
-    showPage(1);
-  }
-
-  function prevPage() {
-    showPage(0);
-  }*/
 </script>
 </html>
