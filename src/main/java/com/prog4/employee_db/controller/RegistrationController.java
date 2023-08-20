@@ -1,18 +1,16 @@
-package com.prog4.controller;
+package com.prog4.employee_db.controller;
 
-import com.prog4.controller.mapper.UserMapper;
-import com.prog4.controller.model.ModelUSer;
-import com.prog4.entity.Member;
-import com.prog4.service.UserService;
+import com.prog4.employee_db.controller.mapper.UserMapper;
+import com.prog4.employee_db.controller.model.ModelUSer;
+import com.prog4.employee_db.service.UserService;
+import com.prog4.employee_db.entity.Member;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,4 +1,4 @@
-package com.prog4.entity;
+package com.prog4.employee_db.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

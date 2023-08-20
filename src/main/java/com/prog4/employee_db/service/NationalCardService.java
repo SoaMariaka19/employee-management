@@ -1,7 +1,7 @@
-package com.prog4.service;
+package com.prog4.employee_db.service;
 
-import com.prog4.entity.NationalCard;
-import com.prog4.repository.NationalCardRepository;
+import com.prog4.employee_db.entity.NationalCard;
+import com.prog4.employee_db.repository.NationalCardRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

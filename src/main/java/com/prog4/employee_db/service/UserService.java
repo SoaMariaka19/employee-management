@@ -1,8 +1,7 @@
-package com.prog4.service;
+package com.prog4.employee_db.service;
 
-import com.prog4.entity.Member;
-import com.prog4.repository.UserRepository;
-import com.prog4.service.securityConf.BcryptEncodePassword;
+import com.prog4.employee_db.entity.Member;
+import com.prog4.employee_db.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,9 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Service

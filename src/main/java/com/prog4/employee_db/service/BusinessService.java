@@ -1,7 +1,7 @@
-package com.prog4.service;
+package com.prog4.employee_db.service;
 
-import com.prog4.entity.Business;
-import com.prog4.repository.BusinessRepository;
+import com.prog4.employee_db.entity.Business;
+import com.prog4.employee_db.repository.BusinessRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

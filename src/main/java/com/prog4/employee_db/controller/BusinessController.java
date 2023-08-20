@@ -1,13 +1,12 @@
-package com.prog4.controller;
+package com.prog4.employee_db.controller;
 
-import com.prog4.controller.mapper.BusinessMapper;
-import com.prog4.controller.model.ModelBusiness;
-import com.prog4.entity.Business;
-import com.prog4.entity.Employee;
-import com.prog4.repository.BusinessRepository;
-import com.prog4.repository.EmployeeRepository;
+import com.prog4.employee_db.controller.mapper.BusinessMapper;
+import com.prog4.employee_db.controller.model.ModelBusiness;
+import com.prog4.employee_db.entity.Business;
+import com.prog4.employee_db.entity.Employee;
+import com.prog4.employee_db.repository.BusinessRepository;
+import com.prog4.employee_db.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

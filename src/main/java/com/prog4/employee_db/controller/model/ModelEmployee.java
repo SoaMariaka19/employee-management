@@ -1,6 +1,6 @@
-package com.prog4.controller.model;
+package com.prog4.employee_db.controller.model;
 
-import com.prog4.entity.*;
+import com.prog4.employee_db.entity.Sex;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 

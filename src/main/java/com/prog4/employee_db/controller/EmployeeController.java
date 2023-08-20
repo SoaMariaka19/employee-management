@@ -1,17 +1,15 @@
-package com.prog4.controller;
+package com.prog4.employee_db.controller;
 
-import com.prog4.controller.mapper.EmployeeMapper;
-import com.prog4.controller.model.ModelEmployee;
-import com.prog4.entity.*;
-import com.prog4.repository.BusinessRepository;
-import com.prog4.repository.EmployeeRepository;
-import com.prog4.repository.PhoneNumberRepository;
-import com.prog4.service.CnapsService;
-import com.prog4.service.NationalCardService;
-import com.prog4.service.SocioProService;
-import com.prog4.service.validator.AlphanumericValidator;
-import com.prog4.service.EmployeeService;
-import com.prog4.service.validator.PhoneValidator;
+import com.prog4.employee_db.controller.mapper.EmployeeMapper;
+import com.prog4.employee_db.controller.model.ModelEmployee;
+import com.prog4.employee_db.entity.*;
+import com.prog4.employee_db.service.EmployeeService;
+import com.prog4.employee_db.service.SocioProService;
+import com.prog4.employee_db.service.validator.AlphanumericValidator;
+import com.prog4.employee_db.service.validator.PhoneValidator;
+import com.prog4.employee_db.repository.BusinessRepository;
+import com.prog4.employee_db.repository.EmployeeRepository;
+import com.prog4.employee_db.repository.PhoneNumberRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -24,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -45,10 +42,7 @@ public class EmployeeController {
         List<Employee> employees = employeeService.findAll();
         List<Business> business = businessRepository.findAll();
         Business business1 = new Business();
-        if (business.isEmpty()){
-            model.addAttribute("business", business1);
-        }
-        model.addAttribute("business",business.get(0));
+        model.addAttribute("business",business.isEmpty() ? business1 : business.get(0));
         model.addAttribute("employees", employees);
 
         return "employee/list_employee";

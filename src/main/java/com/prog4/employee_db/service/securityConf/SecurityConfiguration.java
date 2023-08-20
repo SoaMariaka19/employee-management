@@ -1,6 +1,6 @@
-package com.prog4.service.securityConf;
+package com.prog4.employee_db.service.securityConf;
 
-import com.prog4.service.UserService;
+import com.prog4.employee_db.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

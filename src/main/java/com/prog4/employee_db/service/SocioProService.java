@@ -1,7 +1,7 @@
-package com.prog4.service;
+package com.prog4.employee_db.service;
 
-import com.prog4.entity.SocioPro;
-import com.prog4.repository.SocioProRepository;
+import com.prog4.employee_db.entity.SocioPro;
+import com.prog4.employee_db.repository.SocioProRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

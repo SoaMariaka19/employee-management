@@ -1,7 +1,7 @@
-package com.prog4.service;
+package com.prog4.employee_db.service;
 
-import com.prog4.entity.Cnaps;
-import com.prog4.repository.CnapsRepository;
+import com.prog4.employee_db.entity.Cnaps;
+import com.prog4.employee_db.repository.CnapsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

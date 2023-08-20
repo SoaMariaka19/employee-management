@@ -1,7 +1,7 @@
-package com.prog4.controller.mapper;
+package com.prog4.employee_db.controller.mapper;
 
-import com.prog4.controller.model.ModelUSer;
-import com.prog4.entity.Member;
+import com.prog4.employee_db.controller.model.ModelUSer;
+import com.prog4.employee_db.entity.Member;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.prog4.controller.model;
+package com.prog4.employee_db.controller.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

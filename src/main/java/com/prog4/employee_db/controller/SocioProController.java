@@ -1,9 +1,9 @@
-package com.prog4.controller;
+package com.prog4.employee_db.controller;
 
-import com.prog4.entity.Business;
-import com.prog4.entity.SocioPro;
-import com.prog4.repository.BusinessRepository;
-import com.prog4.service.SocioProService;
+import com.prog4.employee_db.service.SocioProService;
+import com.prog4.employee_db.entity.Business;
+import com.prog4.employee_db.entity.SocioPro;
+import com.prog4.employee_db.repository.BusinessRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

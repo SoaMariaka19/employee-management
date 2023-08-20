@@ -1,10 +1,10 @@
-package com.prog4.controller.mapper;
+package com.prog4.employee_db.controller.mapper;
 
-import com.prog4.controller.model.ModelBusiness;
-import com.prog4.entity.Business;
-import com.prog4.entity.CustomMultipartFile;
-import com.prog4.entity.Fiscal;
-import com.prog4.service.BusinessService;
+import com.prog4.employee_db.controller.model.ModelBusiness;
+import com.prog4.employee_db.entity.Fiscal;
+import com.prog4.employee_db.service.BusinessService;
+import com.prog4.employee_db.entity.Business;
+import com.prog4.employee_db.entity.CustomMultipartFile;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -1,9 +1,11 @@
-package com.prog4.controller.mapper;
+package com.prog4.employee_db.controller.mapper;
 
-import com.prog4.controller.model.ModelEmployee;
-import com.prog4.entity.*;
-import com.prog4.repository.PhoneNumberRepository;
-import com.prog4.service.*;
+import com.prog4.employee_db.controller.model.ModelEmployee;
+import com.prog4.employee_db.entity.*;
+import com.prog4.employee_db.service.CnapsService;
+import com.prog4.employee_db.service.NationalCardService;
+import com.prog4.employee_db.service.SocioProService;
+import com.prog4.employee_db.repository.PhoneNumberRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +13,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.util.Objects;
 
 @Component
 @AllArgsConstructor

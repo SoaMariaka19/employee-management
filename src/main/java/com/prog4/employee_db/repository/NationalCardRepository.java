@@ -1,6 +1,6 @@
-package com.prog4.repository;
+package com.prog4.employee_db.repository;
 
-import com.prog4.entity.NationalCard;
+import com.prog4.employee_db.entity.NationalCard;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

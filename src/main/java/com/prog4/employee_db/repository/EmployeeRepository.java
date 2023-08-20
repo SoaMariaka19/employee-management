@@ -1,6 +1,6 @@
-package com.prog4.repository;
+package com.prog4.employee_db.repository;
 
-import com.prog4.entity.Employee;
+import com.prog4.employee_db.entity.Employee;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;

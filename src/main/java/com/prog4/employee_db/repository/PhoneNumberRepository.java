@@ -1,6 +1,6 @@
-package com.prog4.repository;
+package com.prog4.employee_db.repository;
 
-import com.prog4.entity.PhoneNumber;
+import com.prog4.employee_db.entity.PhoneNumber;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,4 +1,4 @@
-package com.prog4.service.validator;
+package com.prog4.employee_db.service.validator;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

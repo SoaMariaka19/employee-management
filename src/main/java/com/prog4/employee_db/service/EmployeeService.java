@@ -1,9 +1,9 @@
-package com.prog4.service;
+package com.prog4.employee_db.service;
 
-import com.prog4.entity.Employee;
-import com.prog4.entity.PhoneNumber;
-import com.prog4.entity.Sex;
-import com.prog4.repository.EmployeeRepository;
+import com.prog4.employee_db.entity.Employee;
+import com.prog4.employee_db.entity.PhoneNumber;
+import com.prog4.employee_db.entity.Sex;
+import com.prog4.employee_db.repository.EmployeeRepository;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
 import lombok.AllArgsConstructor;

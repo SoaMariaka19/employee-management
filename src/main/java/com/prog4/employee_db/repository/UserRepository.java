@@ -1,6 +1,6 @@
-package com.prog4.repository;
+package com.prog4.employee_db.repository;
 
-import com.prog4.entity.Member;
+import com.prog4.employee_db.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
