@@ -50,8 +50,7 @@ public class Employee {
     @OneToMany
     private List<PhoneNumber> phoneNumbers;
 
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE})
-    private Cnaps nbrCnaps;
+    private String end_to_end_id;
 
     @PrePersist
     public void generatedRegistrationNbr(){
