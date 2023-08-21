@@ -40,6 +40,6 @@ public class ModelEmployee {
     private String cinDate;
     private String cinPlace;
     private String post;
-    private String nbrCnaps;
+    private String end_to_end_id;
 
 }
