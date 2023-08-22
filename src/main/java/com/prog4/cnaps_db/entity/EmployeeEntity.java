@@ -13,5 +13,6 @@ public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String end_to_end_id;
+    private String nbrCnaps;
+    private Long endToEndId;
 }
