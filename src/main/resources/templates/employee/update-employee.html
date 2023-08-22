@@ -117,13 +117,6 @@
     <input type="text" id="post" th:field="*{post}"/>
     <br/>
 
-
-    <label for="nbrCnaps">CNAPS Number:</label>
-    <input type="text" th:field="${newEmployee.nbrCnaps.id}" hidden>
-    <input type="text" id="nbrCnaps" th:field="*{nbrCnaps.nbrCNAPS}" required>
-    <br/>
-    <p th:if="${cnapsError}" class="cinError" th:text="${cnapsError}"></p>
-
     <button type="submit">Update</button>
 
 </form>
