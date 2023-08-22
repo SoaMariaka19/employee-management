@@ -28,10 +28,7 @@ public class SocioProController {
     public String showSocioForm(Model model){
         List<Business> business = businessRepository.findAll();
         Business business1 = new Business();
-        if (business.isEmpty()){
-            model.addAttribute("business", business1);
-        }
-        model.addAttribute("business",business.get(0));
+        model.addAttribute("business",business.isEmpty() ? business1 : business.get(0));
         model.addAttribute("sociopro",new SocioPro());
         return "socio-pro/add-socio-pro";
     }
