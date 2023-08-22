@@ -44,7 +44,7 @@ public class BusinessController {
             model.addAttribute("employee", posts);
         }
         model.addAttribute("employee", posts);
-        model.addAttribute("business",business.get(0));
+        model.addAttribute("business",business.isEmpty() ? business1 : business.get(0));
         return "business/profiles";
     }
     @PostMapping("/business/create")
