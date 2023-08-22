@@ -50,8 +50,6 @@ public class Employee {
     @OneToMany
     private List<PhoneNumber> phoneNumbers;
 
-    private String end_to_end_id;
-
     @PrePersist
     public void generatedRegistrationNbr(){
         this.registrationNbr = "EMP-" + UUID.randomUUID();
