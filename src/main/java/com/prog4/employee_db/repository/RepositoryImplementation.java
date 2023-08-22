@@ -16,18 +16,14 @@ public class EmployeeDtoFacade {
     private EmployeeEntityRepository employeeEntityRepository; // Repository for cnaps_db
 
     public ModelEmployee getEmployeeDtoByEndToEndId(String endToEndId) {
-        Employee employee = employeeRepository.findByEnd_to_end_id(endToEndId);
-        EmployeeEntity employeeEntity = employeeEntityRepository.findByEnd_to_end_id(endToEndId);
+        EmployeeEntity employeeEntity = employeeEntityRepository.findEmployeeEntityByEndToEndId(endToEndId);
 
-        return mapToDto(employee, employeeEntity);
+        return mapToDto(employeeEntity);
     }
 
-    private ModelEmployee mapToDto(Employee employee, EmployeeEntity employeeEntity) {
-        ModelEmployee dto = new ModelEmployee();
-        dto.setId(employee.getId());
-        dto.setLastName(employee.getLastName());
-        dto.setFirstName(employee.getFirstName());
-        dto.setEnd_to_end_id(employee.getEnd_to_end_id());
-        return dto;
+    private ModelEmployee mapToDto(EmployeeEntity employeeEntity) {
+        return ModelEmployee.builder()
+                .nbrCnaps(employeeEntity.getNbrCnaps())
+                .build();
     }
 }
