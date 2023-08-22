@@ -4,6 +4,7 @@ import com.prog4.employee_db.controller.mapper.EmployeeMapper;
 import com.prog4.employee_db.controller.model.ModelEmployee;
 import com.prog4.employee_db.entity.*;
 import com.prog4.employee_db.service.EmployeeService;
+import com.prog4.employee_db.service.MapDTOService;
 import com.prog4.employee_db.service.SocioProService;
 import com.prog4.employee_db.service.validator.AlphanumericValidator;
 import com.prog4.employee_db.service.validator.PhoneValidator;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @AllArgsConstructor
@@ -31,6 +31,7 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
     private final EmployeeRepository repository;
+    private final MapDTOService mapDTOService;
     private final PhoneNumberRepository phoneNumberRepository;
     private final BusinessRepository businessRepository;
     private SocioProService socioProService;
@@ -75,10 +76,7 @@ public class EmployeeController {
     ) {
         List<Business> business = businessRepository.findAll();
         Business business1 = new Business();
-        if (business.isEmpty()){
-            model.addAttribute("business", business1);
-        }
-        model.addAttribute("business",business.get(0));
+        model.addAttribute("business",business.isEmpty() ? business1 : business.get(0));
         Specification<Employee> spec = employeeService.buildEmployeeSpecification(
                 lastName, firstName, sex, postName, minHireDate, maxHireDate, minLeaveDate, maxLeaveDate , phone);
 
@@ -97,10 +95,7 @@ public class EmployeeController {
     public String showAddEmployeeForm(Model model){
         List<Business> business = businessRepository.findAll();
         Business business1 = new Business();
-        if (business.isEmpty()){
-            model.addAttribute("business", business1);
-        }
-        model.addAttribute("business",business.get(0));
+        model.addAttribute("business",business.isEmpty() ? business1 : business.get(0));
         model.addAttribute("employee", new ModelEmployee());
         return "employee/add-employee";
     }
@@ -136,15 +131,11 @@ public class EmployeeController {
     public String showEmployeeDetails(
             @PathVariable("id") Long id, Model model
     ){
-        Employee employee = employeeService.findById(id);
         List<Business> business = businessRepository.findAll();
         Business business1 = new Business();
-        if (business.isEmpty()){
-            model.addAttribute("business", business1);
-        }
-        ModelEmployee modelEmployee = mapper.convertToEmployeeForm(employee);
+        ModelEmployee modelEmployee = mapDTOService.getByEndToEndId(id);
         model.addAttribute("employee", modelEmployee);
-        model.addAttribute("business",business.get(0));
+        model.addAttribute("business",business.isEmpty() ? business1 : business.get(0));
         return "employee/profiles";
     }
 
@@ -152,12 +143,9 @@ public class EmployeeController {
     public String showUpdateEmployeeForm(@PathVariable("id") Long employeeId, Model model) {
         List<Business> business = businessRepository.findAll();
         Business business1 = new Business();
-        if (business.isEmpty()){
-            model.addAttribute("business", business1);
-        }
-        model.addAttribute("business",business.get(0));
+        model.addAttribute("business",business.isEmpty() ? business1 : business.get(0));
         Employee employee = employeeService.findById(employeeId);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        /*  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         if(employee.getBeggingDate() != null){
             employee.setFormattedBeggingDate(employee.getBeggingDate().format(formatter));
@@ -167,7 +155,7 @@ public class EmployeeController {
             employee.setFormattedOutDate(employee.getOutDate().format(formatter));
         }
 
-        employee.setFormattedOutDate("");
+        employee.setFormattedOutDate(""); */
         model.addAttribute("newEmployee", employee);
         return "employee/update-employee";
     }
@@ -216,8 +204,7 @@ public class EmployeeController {
                                 employee.getCateSocioPro().getCategories() + "," +
                                 employee.getCin().getNumber() + "," +
                                 employee.getCin().getDate() + "," +
-                                employee.getCin().getPlace() + "," +
-                                employee.getNbrCnaps().getNbrCNAPS()
+                                employee.getCin().getPlace() + ","
                 );
             }
         }
