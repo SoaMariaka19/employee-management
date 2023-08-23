@@ -6,6 +6,7 @@ import com.prog4.employee_db.entity.*;
 import com.prog4.employee_db.service.EmployeeService;
 import com.prog4.employee_db.service.MapDTOService;
 import com.prog4.employee_db.service.SocioProService;
+import com.prog4.employee_db.service.facade.FacadeEmployeeService;
 import com.prog4.employee_db.service.validator.AlphanumericValidator;
 import com.prog4.employee_db.service.validator.PhoneValidator;
 import com.prog4.employee_db.repository.BusinessRepository;
@@ -30,6 +31,7 @@ import java.util.List;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final FacadeEmployeeService facadeEmployeeService;
     private final EmployeeRepository repository;
     private final MapDTOService mapDTOService;
     private final PhoneNumberRepository phoneNumberRepository;
@@ -133,8 +135,12 @@ public class EmployeeController {
     ){
         List<Business> business = businessRepository.findAll();
         Business business1 = new Business();
-        ModelEmployee modelEmployee = mapDTOService.getByEndToEndId(id);
-        model.addAttribute("employee", modelEmployee);
+        /*ModelEmployee modelEmployee = mapDTOService.getByEndToEndId(id);
+        * model.addAttribute("employee", modelEmployee);
+        *
+        * */
+        ModelEmployee modelEmployee1 = facadeEmployeeService.getModelEmployeeResult(id);
+        model.addAttribute("employee", modelEmployee1);
         model.addAttribute("business",business.isEmpty() ? business1 : business.get(0));
         return "employee/profiles";
     }
