@@ -5,8 +5,6 @@ import com.prog4.cnaps_db.repositories.EmployeeEntityRepository;
 import com.prog4.employee_db.controller.model.ModelEmployee;
 import com.prog4.employee_db.entity.Employee;
 import com.prog4.employee_db.entity.PhoneNumber;
-import com.prog4.employee_db.repository.EmployeeRepository;
-import com.prog4.employee_db.service.NationalCardService;
 import com.prog4.employee_db.service.SocioProService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +18,6 @@ import java.util.Optional;
 public class RepositoryImplementation {
     private SocioProService socioProService;
     private EmployeeRepository employeeRepository; // Repository for employee_db
-
     private EmployeeEntityRepository employeeEntityRepository; // Repository for cnaps_db
 
     public ModelEmployee getEmployeeDtoByEndToEndId(Long endToEndId) {
@@ -30,7 +27,7 @@ public class RepositoryImplementation {
         return mapToDto(employee.orElseThrow(() -> new RuntimeException("employee id "+endToEndId+"not found")), employeeEntity.orElseGet(EmployeeEntity::new));
     }
 
-    private ModelEmployee mapToDto(Employee employee, EmployeeEntity employeeEntity) {
+    public ModelEmployee mapToDto(Employee employee, EmployeeEntity employeeEntity) {
         List<String> phoneNumbers = new ArrayList<>();
         for(PhoneNumber number : employee.getPhoneNumbers()){
             phoneNumbers.add(number.getNumber());
