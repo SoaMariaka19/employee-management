@@ -13,6 +13,8 @@ public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String nbrCnaps;
+    @Column(unique = true, nullable = false)
     private Long endToEndId;
 }
